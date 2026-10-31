@@ -1,3 +1,4 @@
+import {readFileSync} from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {SYNTHETIC_SPATIAL as spatial} from '../web/synthetic-graph.js';
@@ -252,4 +253,39 @@ test('profile edits and exported/snapshot objects cannot leak across runs', t =>
   assert.throws(() => normalizeProfiles(invalid), /Invalid profile/);
   assert.throws(() => c.step(-1), /Invalid step/);
   assert.throws(() => c.step(Infinity), /Invalid step/);
+});
+
+test('fractional playback steps preserve exact event and action timing', async t => {
+  const c = createGateDemoController(spatial, {mode:'agent'});
+  t.after(() => c.dispose());
+  for (let n=0;c.getTime()<DEMO_INPUTS.departureAt && n<1000;n++) {
+    c.step(Math.min(.37,DEMO_INPUTS.departureAt-c.getTime()));
+    await c.resolveDecisions();
+  }
+  assert.equal(c.getTime(),DEMO_INPUTS.departureAt);
+  assert.deepEqual(state(c).passengers.map(p=>p.arrivedAt),[113,116,128]);
+  assert.deepEqual(accepted(c).slice(0,3).map(e=>e.time),[13,13,13]);
+  assert.ok(c.assertInvariants());
+});
+
+
+test('bounded profile edits change the next authored decision after an explicit new run', async t => {
+  const profiles=structuredClone(DEFAULT_PROFILES);
+  profiles[1].traits.familiarity=.9;
+  profiles[2].traits.safetyMarginSeconds=180;
+  const c=createGateDemoController(spatial,{profiles,mode:'agent',policy:'mock'});
+  t.after(()=>c.dispose());c.announce();await c.resolveDecisions();
+  assert.deepEqual(accepted(c).map(e=>e.action),['go_to_announced_gate','go_to_announced_gate','go_to_announced_gate']);
+  assert.equal(state(c).profiles[1].traits.familiarity,.9);
+  assert.equal(DEFAULT_PROFILES[1].traits.familiarity,.2);
+  assert.equal(c.assertInvariants(),true);
+});
+
+
+test('recorded Nosana replay reproduces decisions and outcomes without new model calls',async t=>{
+ const recording=JSON.parse(readFileSync(new URL('../web/recordings/nosana-live-run.json',import.meta.url),'utf8'));const original=JSON.stringify(recording);let calls=0;
+ const c=createGateDemoController(spatial,{mode:'agent',policy:'replay',recording,profiles:recording.profiles,decide:()=>{calls++;throw Error('Replay must not call a model');}});t.after(()=>c.dispose());
+ await advanceTo(c,241);assert.equal(calls,0);assert.equal(state(c).replaySource.externalModelCalls,0);assert.equal(state(c).providerStatus,'recorded_replay');
+ assert.deepEqual(state(c).passengers.map(p=>p.arrivedAt),[113,116,113]);assert.ok(accepted(c).every(e=>e.source==='replay'));assert.equal(accepted(c).length,4);assert.equal(JSON.stringify(recording),original);
+ const edited=structuredClone(recording.profiles);edited[0].traits.familiarity=.1;assert.throws(()=>createGateDemoController(spatial,{policy:'replay',recording,profiles:edited}),/original recorded profiles/);
 });

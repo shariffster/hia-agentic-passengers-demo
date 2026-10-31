@@ -1,0 +1,36 @@
+{
+  "schema": "hia.daytona.engine-manifest/1",
+  "source": "HIA approved sanitized public-export/web",
+  "files": [
+    {
+      "path": "vendor/gate-agent-demo.js",
+      "sha256": "4a5cebf31d900ee203b421d78758b1c0a27bfa662f98981fc3e297e4eaf06380",
+      "bytes": 16404
+    },
+    {
+      "path": "vendor/recovery-world.js",
+      "sha256": "206d0b233c45385b3eac9839363f9b258e0658aa19210d6b5b920458688cefee",
+      "bytes": 69852
+    },
+    {
+      "path": "vendor/recovery-simulation.js",
+      "sha256": "82d9362e7e789176da33bf60395c49a8ad74a67cc89f8ad2ff5a2720556b2531",
+      "bytes": 78735
+    },
+    {
+      "path": "vendor/simulation.js",
+      "sha256": "83b8624799b21a4c265056b1516f5d25aa421cc4afd7c6af821cbb472263be1a",
+      "bytes": 36883
+    },
+    {
+      "path": "vendor/holding-layout.js",
+      "sha256": "9f37f1322d17bb603ec738f035abe1bc40e58bf58ff2a40fd7a506089c2370fa",
+      "bytes": 733
+    },
+    {
+      "path": "vendor/synthetic-graph.js",
+      "sha256": "a1ff74c5dfe535be85ee995ad336ea560fc894488a3228da039594d2e35ee21d",
+      "bytes": 594
+    }
+  ]
+}

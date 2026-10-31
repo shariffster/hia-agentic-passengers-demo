@@ -1,0 +1,607 @@
+{
+  "schema": "hia.gate-agent-demo/1",
+  "createdAt": "2026-10-31T09:38:42.389Z",
+  "synthetic": true,
+  "calibrated": false,
+  "notice": "Authored illustrative profiles. Reconstructed semantic gates. Declared summaries are not evidence of internal model reasoning.",
+  "runId": "gate-run-2",
+  "mode": "agent",
+  "policy": "live",
+  "providerStatus": "live_response_received",
+  "lastError": null,
+  "pendingCount": 0,
+  "time": 241,
+  "announced": true,
+  "seed": 42,
+  "walkingSpeedMps": 1.2,
+  "oldGate": "a_0",
+  "newGate": "a_1",
+  "changeAt": 11,
+  "announcementAt": 13,
+  "departureAt": 241,
+  "profiles": [
+    {
+      "id": "DEMO-1",
+      "name": "Alex",
+      "color": "#12b8a6",
+      "traits": {
+        "consequenceSensitivity": 0.95,
+        "safetyMarginSeconds": 120,
+        "familiarity": 0.9
+      },
+      "needs": {
+        "fatigue": 0.15
+      }
+    },
+    {
+      "id": "DEMO-2",
+      "name": "Sam",
+      "color": "#e8a13d",
+      "traits": {
+        "consequenceSensitivity": 0.8,
+        "safetyMarginSeconds": 90,
+        "familiarity": 0.2
+      },
+      "needs": {
+        "fatigue": 0.25
+      }
+    },
+    {
+      "id": "DEMO-3",
+      "name": "Jo",
+      "color": "#a78bfa",
+      "traits": {
+        "consequenceSensitivity": 0.35,
+        "safetyMarginSeconds": 30,
+        "familiarity": 0.7
+      },
+      "needs": {
+        "fatigue": 0.5
+      }
+    }
+  ],
+  "comparisonInputs": {
+    "seed": 42,
+    "walkingSpeedMps": 1.2,
+    "oldGate": "a_0",
+    "newGate": "a_1",
+    "changeAt": 11,
+    "announcementAt": 13,
+    "departureAt": 241,
+    "profiles": [
+      {
+        "id": "DEMO-1",
+        "name": "Alex",
+        "color": "#12b8a6",
+        "traits": {
+          "consequenceSensitivity": 0.95,
+          "safetyMarginSeconds": 120,
+          "familiarity": 0.9
+        },
+        "needs": {
+          "fatigue": 0.15
+        }
+      },
+      {
+        "id": "DEMO-2",
+        "name": "Sam",
+        "color": "#e8a13d",
+        "traits": {
+          "consequenceSensitivity": 0.8,
+          "safetyMarginSeconds": 90,
+          "familiarity": 0.2
+        },
+        "needs": {
+          "fatigue": 0.25
+        }
+      },
+      {
+        "id": "DEMO-3",
+        "name": "Jo",
+        "color": "#a78bfa",
+        "traits": {
+          "consequenceSensitivity": 0.35,
+          "safetyMarginSeconds": 30,
+          "familiarity": 0.7
+        },
+        "needs": {
+          "fatigue": 0.5
+        }
+      }
+    ]
+  },
+  "passengers": [
+    {
+      "id": "DEMO-1",
+      "name": "Alex",
+      "color": "#12b8a6",
+      "state": "modeled_departed",
+      "position": [
+        120,
+        0,
+        0
+      ],
+      "gateNodeId": "a_1",
+      "arrivedAt": 113,
+      "decisionCount": 1,
+      "lastAction": "go_to_announced_gate",
+      "outcome": "synthetic_departed",
+      "knowledge": {
+        "publishedGate": "a_1",
+        "revision": 1,
+        "boardReads": 0,
+        "waits": 0,
+        "confidence": 0.9,
+        "lastSource": "gate_announcement"
+      },
+      "needs": {
+        "fatigue": 0.1834722222222222
+      },
+      "constraints": {
+        "walkingSpeedMps": 1.2,
+        "stepFreeRequired": false
+      },
+      "routeNodeIds": []
+    },
+    {
+      "id": "DEMO-2",
+      "name": "Sam",
+      "color": "#e8a13d",
+      "state": "modeled_departed",
+      "position": [
+        120,
+        0,
+        0
+      ],
+      "gateNodeId": "a_1",
+      "arrivedAt": 116,
+      "decisionCount": 2,
+      "lastAction": "go_to_announced_gate",
+      "outcome": "synthetic_departed",
+      "knowledge": {
+        "publishedGate": "a_1",
+        "revision": 1,
+        "boardReads": 1,
+        "waits": 0,
+        "confidence": 0.98,
+        "lastSource": "published_board"
+      },
+      "needs": {
+        "fatigue": 0.28347222222222224
+      },
+      "constraints": {
+        "walkingSpeedMps": 1.2,
+        "stepFreeRequired": false
+      },
+      "routeNodeIds": []
+    },
+    {
+      "id": "DEMO-3",
+      "name": "Jo",
+      "color": "#a78bfa",
+      "state": "modeled_departed",
+      "position": [
+        120,
+        0,
+        0
+      ],
+      "gateNodeId": "a_1",
+      "arrivedAt": 113,
+      "decisionCount": 1,
+      "lastAction": "go_to_announced_gate",
+      "outcome": "synthetic_departed",
+      "knowledge": {
+        "publishedGate": "a_1",
+        "revision": 1,
+        "boardReads": 0,
+        "waits": 0,
+        "confidence": 0.7,
+        "lastSource": "gate_announcement"
+      },
+      "needs": {
+        "fatigue": 0.5334722222222222
+      },
+      "constraints": {
+        "walkingSpeedMps": 1.2,
+        "stepFreeRequired": false
+      },
+      "routeNodeIds": []
+    }
+  ],
+  "log": [
+    {
+      "sequence": 1,
+      "time": 1,
+      "passengerId": null,
+      "type": "run_ready",
+      "detail": "Same seed, speeds, profiles and published information in both arms."
+    },
+    {
+      "sequence": 2,
+      "time": 13,
+      "passengerId": "DEMO-1",
+      "type": "announcement",
+      "detail": "Published gate changed from a_0 to a_1."
+    },
+    {
+      "sequence": 3,
+      "time": 13,
+      "passengerId": "DEMO-2",
+      "type": "announcement",
+      "detail": "Published gate changed from a_0 to a_1."
+    },
+    {
+      "sequence": 4,
+      "time": 13,
+      "passengerId": "DEMO-3",
+      "type": "announcement",
+      "detail": "Published gate changed from a_0 to a_1."
+    },
+    {
+      "sequence": 5,
+      "time": 13,
+      "passengerId": "DEMO-1",
+      "type": "observation",
+      "detail": "Gate-change announcement received."
+    },
+    {
+      "sequence": 6,
+      "time": 13,
+      "passengerId": "DEMO-2",
+      "type": "observation",
+      "detail": "Gate-change announcement received."
+    },
+    {
+      "sequence": 7,
+      "time": 13,
+      "passengerId": "DEMO-3",
+      "type": "observation",
+      "detail": "Gate-change announcement received."
+    },
+    {
+      "sequence": 8,
+      "time": 13,
+      "passengerId": "DEMO-3",
+      "type": "proposed",
+      "detail": "Bounded action proposed for validation.",
+      "source": "live",
+      "action": "go_to_announced_gate"
+    },
+    {
+      "sequence": 9,
+      "time": 13,
+      "passengerId": "DEMO-3",
+      "type": "accepted",
+      "detail": "Move to the announced gate.",
+      "action": "go_to_announced_gate",
+      "source": "live",
+      "provider": "Nosana hosted inference",
+      "model": "qwen/qwen3.8-27b",
+      "usage": {
+        "prompt_tokens": 630,
+        "completion_tokens": 249,
+        "total_tokens": 879
+      },
+      "observation": {
+        "passengerId": "DEMO-3",
+        "time": 13,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "currentActivity": "awaiting_recovery",
+        "traits": {
+          "consequenceSensitivity": 0.35,
+          "safetyMarginSeconds": 30,
+          "familiarity": 0.7
+        },
+        "needs": {
+          "fatigue": 0.5018055555555555
+        },
+        "knowledge": {
+          "publishedGate": "a_1",
+          "revision": 1,
+          "boardReads": 0,
+          "waits": 0,
+          "confidence": 0.7,
+          "lastSource": "gate_announcement"
+        },
+        "constraints": {
+          "walkingSpeedMps": 1.2,
+          "stepFreeRequired": false,
+          "maxWaitSeconds": 30,
+          "synthetic": true
+        },
+        "flight": {
+          "id": "demo-flight",
+          "publishedGateNodeId": "a_1",
+          "publishedStatus": "scheduled",
+          "scheduledDepartureSeconds": 241,
+          "secondsToDeparture": 228
+        },
+        "routeEstimate": {
+          "seconds": 100,
+          "metres": 120
+        },
+        "allowedActions": [
+          "go_to_announced_gate",
+          "read_board",
+          "wait"
+        ],
+        "previousResults": []
+      }
+    },
+    {
+      "sequence": 10,
+      "time": 13,
+      "passengerId": "DEMO-1",
+      "type": "proposed",
+      "detail": "Bounded action proposed for validation.",
+      "source": "live",
+      "action": "go_to_announced_gate"
+    },
+    {
+      "sequence": 11,
+      "time": 13,
+      "passengerId": "DEMO-1",
+      "type": "accepted",
+      "detail": "Proceed to announced gate a_1 within the required safety margin.",
+      "action": "go_to_announced_gate",
+      "source": "live",
+      "provider": "Nosana hosted inference",
+      "model": "qwen/qwen3.8-27b",
+      "usage": {
+        "prompt_tokens": 632,
+        "completion_tokens": 254,
+        "total_tokens": 886
+      },
+      "observation": {
+        "passengerId": "DEMO-1",
+        "time": 13,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "currentActivity": "awaiting_recovery",
+        "traits": {
+          "consequenceSensitivity": 0.95,
+          "safetyMarginSeconds": 120,
+          "familiarity": 0.9
+        },
+        "needs": {
+          "fatigue": 0.15180555555555555
+        },
+        "knowledge": {
+          "publishedGate": "a_1",
+          "revision": 1,
+          "boardReads": 0,
+          "waits": 0,
+          "confidence": 0.9,
+          "lastSource": "gate_announcement"
+        },
+        "constraints": {
+          "walkingSpeedMps": 1.2,
+          "stepFreeRequired": false,
+          "maxWaitSeconds": 30,
+          "synthetic": true
+        },
+        "flight": {
+          "id": "demo-flight",
+          "publishedGateNodeId": "a_1",
+          "publishedStatus": "scheduled",
+          "scheduledDepartureSeconds": 241,
+          "secondsToDeparture": 228
+        },
+        "routeEstimate": {
+          "seconds": 100,
+          "metres": 120
+        },
+        "allowedActions": [
+          "go_to_announced_gate",
+          "read_board",
+          "wait"
+        ],
+        "previousResults": []
+      }
+    },
+    {
+      "sequence": 12,
+      "time": 13,
+      "passengerId": "DEMO-2",
+      "type": "proposed",
+      "detail": "Bounded action proposed for validation.",
+      "source": "live",
+      "action": "read_board"
+    },
+    {
+      "sequence": 13,
+      "time": 13,
+      "passengerId": "DEMO-2",
+      "type": "accepted",
+      "detail": "Check the published gate information before moving.",
+      "action": "read_board",
+      "source": "live",
+      "provider": "Nosana hosted inference",
+      "model": "qwen/qwen3.8-27b",
+      "usage": {
+        "prompt_tokens": 630,
+        "completion_tokens": 352,
+        "total_tokens": 982
+      },
+      "observation": {
+        "passengerId": "DEMO-2",
+        "time": 13,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "currentActivity": "awaiting_recovery",
+        "traits": {
+          "consequenceSensitivity": 0.8,
+          "safetyMarginSeconds": 90,
+          "familiarity": 0.2
+        },
+        "needs": {
+          "fatigue": 0.25180555555555556
+        },
+        "knowledge": {
+          "publishedGate": "a_1",
+          "revision": 1,
+          "boardReads": 0,
+          "waits": 0,
+          "confidence": 0.2,
+          "lastSource": "gate_announcement"
+        },
+        "constraints": {
+          "walkingSpeedMps": 1.2,
+          "stepFreeRequired": false,
+          "maxWaitSeconds": 30,
+          "synthetic": true
+        },
+        "flight": {
+          "id": "demo-flight",
+          "publishedGateNodeId": "a_1",
+          "publishedStatus": "scheduled",
+          "scheduledDepartureSeconds": 241,
+          "secondsToDeparture": 228
+        },
+        "routeEstimate": {
+          "seconds": 100,
+          "metres": 120
+        },
+        "allowedActions": [
+          "go_to_announced_gate",
+          "read_board",
+          "wait"
+        ],
+        "previousResults": []
+      }
+    },
+    {
+      "sequence": 14,
+      "time": 16,
+      "passengerId": "DEMO-2",
+      "type": "completed",
+      "detail": "Published board checked; location unchanged.",
+      "action": "read_board"
+    },
+    {
+      "sequence": 15,
+      "time": 16,
+      "passengerId": "DEMO-2",
+      "type": "observation",
+      "detail": "Action result received; choose the next permitted action."
+    },
+    {
+      "sequence": 16,
+      "time": 16,
+      "passengerId": "DEMO-2",
+      "type": "proposed",
+      "detail": "Bounded action proposed for validation.",
+      "source": "live",
+      "action": "go_to_announced_gate"
+    },
+    {
+      "sequence": 17,
+      "time": 16,
+      "passengerId": "DEMO-2",
+      "type": "accepted",
+      "detail": "Move to the announced gate with adequate time before departure.",
+      "action": "go_to_announced_gate",
+      "source": "live",
+      "provider": "Nosana hosted inference",
+      "model": "qwen/qwen3.8-27b",
+      "usage": {
+        "prompt_tokens": 678,
+        "completion_tokens": 256,
+        "total_tokens": 934
+      },
+      "observation": {
+        "passengerId": "DEMO-2",
+        "time": 16,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "currentActivity": "awaiting_recovery",
+        "traits": {
+          "consequenceSensitivity": 0.8,
+          "safetyMarginSeconds": 90,
+          "familiarity": 0.2
+        },
+        "needs": {
+          "fatigue": 0.25222222222222224
+        },
+        "knowledge": {
+          "publishedGate": "a_1",
+          "revision": 1,
+          "boardReads": 1,
+          "waits": 0,
+          "confidence": 0.98,
+          "lastSource": "published_board"
+        },
+        "constraints": {
+          "walkingSpeedMps": 1.2,
+          "stepFreeRequired": false,
+          "maxWaitSeconds": 30,
+          "synthetic": true
+        },
+        "flight": {
+          "id": "demo-flight",
+          "publishedGateNodeId": "a_1",
+          "publishedStatus": "scheduled",
+          "scheduledDepartureSeconds": 241,
+          "secondsToDeparture": 225
+        },
+        "routeEstimate": {
+          "seconds": 100,
+          "metres": 120
+        },
+        "allowedActions": [
+          "go_to_announced_gate",
+          "read_board",
+          "wait"
+        ],
+        "previousResults": [
+          {
+            "sequence": 14,
+            "time": 16,
+            "passengerId": "DEMO-2",
+            "type": "completed",
+            "detail": "Published board checked; location unchanged.",
+            "action": "read_board"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 18,
+      "time": 113,
+      "passengerId": "DEMO-3",
+      "type": "completed",
+      "detail": "Reached the published gate through engine movement.",
+      "action": "go_to_announced_gate"
+    },
+    {
+      "sequence": 19,
+      "time": 113,
+      "passengerId": "DEMO-1",
+      "type": "completed",
+      "detail": "Reached the published gate through engine movement.",
+      "action": "go_to_announced_gate"
+    },
+    {
+      "sequence": 20,
+      "time": 116,
+      "passengerId": "DEMO-2",
+      "type": "completed",
+      "detail": "Reached the published gate through engine movement.",
+      "action": "go_to_announced_gate"
+    }
+  ],
+  "invariants": true
+}

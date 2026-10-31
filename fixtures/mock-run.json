@@ -1,0 +1,688 @@
+{
+  "schema": "hia.gate-agent-demo/1",
+  "createdAt": "2026-10-31T09:33:36.514Z",
+  "synthetic": true,
+  "calibrated": false,
+  "notice": "Authored illustrative profiles. Reconstructed semantic gates. Declared summaries are not evidence of internal model reasoning.",
+  "runId": "gate-run-1",
+  "mode": "agent",
+  "policy": "mock",
+  "providerStatus": "deterministic_mock",
+  "lastError": null,
+  "pendingCount": 0,
+  "time": 241,
+  "announced": true,
+  "seed": 42,
+  "walkingSpeedMps": 1.2,
+  "oldGate": "a_0",
+  "newGate": "a_1",
+  "changeAt": 11,
+  "announcementAt": 13,
+  "departureAt": 241,
+  "profiles": [
+    {
+      "id": "DEMO-1",
+      "name": "Alex",
+      "color": "#12b8a6",
+      "traits": {
+        "consequenceSensitivity": 0.95,
+        "safetyMarginSeconds": 120,
+        "familiarity": 0.9
+      },
+      "needs": {
+        "fatigue": 0.15
+      }
+    },
+    {
+      "id": "DEMO-2",
+      "name": "Sam",
+      "color": "#e8a13d",
+      "traits": {
+        "consequenceSensitivity": 0.8,
+        "safetyMarginSeconds": 90,
+        "familiarity": 0.2
+      },
+      "needs": {
+        "fatigue": 0.25
+      }
+    },
+    {
+      "id": "DEMO-3",
+      "name": "Jo",
+      "color": "#a78bfa",
+      "traits": {
+        "consequenceSensitivity": 0.35,
+        "safetyMarginSeconds": 30,
+        "familiarity": 0.7
+      },
+      "needs": {
+        "fatigue": 0.5
+      }
+    }
+  ],
+  "comparisonInputs": {
+    "seed": 42,
+    "walkingSpeedMps": 1.2,
+    "oldGate": "a_0",
+    "newGate": "a_1",
+    "changeAt": 11,
+    "announcementAt": 13,
+    "departureAt": 241,
+    "profiles": [
+      {
+        "id": "DEMO-1",
+        "name": "Alex",
+        "color": "#12b8a6",
+        "traits": {
+          "consequenceSensitivity": 0.95,
+          "safetyMarginSeconds": 120,
+          "familiarity": 0.9
+        },
+        "needs": {
+          "fatigue": 0.15
+        }
+      },
+      {
+        "id": "DEMO-2",
+        "name": "Sam",
+        "color": "#e8a13d",
+        "traits": {
+          "consequenceSensitivity": 0.8,
+          "safetyMarginSeconds": 90,
+          "familiarity": 0.2
+        },
+        "needs": {
+          "fatigue": 0.25
+        }
+      },
+      {
+        "id": "DEMO-3",
+        "name": "Jo",
+        "color": "#a78bfa",
+        "traits": {
+          "consequenceSensitivity": 0.35,
+          "safetyMarginSeconds": 30,
+          "familiarity": 0.7
+        },
+        "needs": {
+          "fatigue": 0.5
+        }
+      }
+    ]
+  },
+  "passengers": [
+    {
+      "id": "DEMO-1",
+      "name": "Alex",
+      "color": "#12b8a6",
+      "state": "modeled_departed",
+      "position": [
+        120,
+        0,
+        0
+      ],
+      "gateNodeId": "a_1",
+      "arrivedAt": 113,
+      "decisionCount": 1,
+      "lastAction": "go_to_announced_gate",
+      "outcome": "synthetic_departed",
+      "knowledge": {
+        "publishedGate": "a_1",
+        "revision": 1,
+        "boardReads": 0,
+        "waits": 0,
+        "confidence": 0.9,
+        "lastSource": "gate_announcement"
+      },
+      "needs": {
+        "fatigue": 0.1834722222222222
+      },
+      "constraints": {
+        "walkingSpeedMps": 1.2,
+        "stepFreeRequired": false
+      },
+      "routeNodeIds": []
+    },
+    {
+      "id": "DEMO-2",
+      "name": "Sam",
+      "color": "#e8a13d",
+      "state": "modeled_departed",
+      "position": [
+        120,
+        0,
+        0
+      ],
+      "gateNodeId": "a_1",
+      "arrivedAt": 116,
+      "decisionCount": 2,
+      "lastAction": "go_to_announced_gate",
+      "outcome": "synthetic_departed",
+      "knowledge": {
+        "publishedGate": "a_1",
+        "revision": 1,
+        "boardReads": 1,
+        "waits": 0,
+        "confidence": 0.98,
+        "lastSource": "published_board"
+      },
+      "needs": {
+        "fatigue": 0.28347222222222224
+      },
+      "constraints": {
+        "walkingSpeedMps": 1.2,
+        "stepFreeRequired": false
+      },
+      "routeNodeIds": []
+    },
+    {
+      "id": "DEMO-3",
+      "name": "Jo",
+      "color": "#a78bfa",
+      "state": "modeled_departed",
+      "position": [
+        120,
+        0,
+        0
+      ],
+      "gateNodeId": "a_1",
+      "arrivedAt": 128,
+      "decisionCount": 2,
+      "lastAction": "go_to_announced_gate",
+      "outcome": "synthetic_departed",
+      "knowledge": {
+        "publishedGate": "a_1",
+        "revision": 1,
+        "boardReads": 0,
+        "waits": 1,
+        "confidence": 0.7,
+        "lastSource": "gate_announcement"
+      },
+      "needs": {
+        "fatigue": 0.5334722222222222
+      },
+      "constraints": {
+        "walkingSpeedMps": 1.2,
+        "stepFreeRequired": false
+      },
+      "routeNodeIds": []
+    }
+  ],
+  "log": [
+    {
+      "sequence": 1,
+      "time": 1,
+      "passengerId": null,
+      "type": "run_ready",
+      "detail": "Same seed, speeds, profiles and published information in both arms."
+    },
+    {
+      "sequence": 2,
+      "time": 13,
+      "passengerId": "DEMO-1",
+      "type": "announcement",
+      "detail": "Published gate changed from a_0 to a_1."
+    },
+    {
+      "sequence": 3,
+      "time": 13,
+      "passengerId": "DEMO-2",
+      "type": "announcement",
+      "detail": "Published gate changed from a_0 to a_1."
+    },
+    {
+      "sequence": 4,
+      "time": 13,
+      "passengerId": "DEMO-3",
+      "type": "announcement",
+      "detail": "Published gate changed from a_0 to a_1."
+    },
+    {
+      "sequence": 5,
+      "time": 13,
+      "passengerId": "DEMO-1",
+      "type": "observation",
+      "detail": "Gate-change announcement received."
+    },
+    {
+      "sequence": 6,
+      "time": 13,
+      "passengerId": "DEMO-2",
+      "type": "observation",
+      "detail": "Gate-change announcement received."
+    },
+    {
+      "sequence": 7,
+      "time": 13,
+      "passengerId": "DEMO-3",
+      "type": "observation",
+      "detail": "Gate-change announcement received."
+    },
+    {
+      "sequence": 8,
+      "time": 13,
+      "passengerId": "DEMO-1",
+      "type": "proposed",
+      "detail": "Bounded action proposed for validation.",
+      "source": "mock",
+      "action": "go_to_announced_gate"
+    },
+    {
+      "sequence": 9,
+      "time": 13,
+      "passengerId": "DEMO-1",
+      "type": "accepted",
+      "detail": "Move to the published gate using the existing route.",
+      "action": "go_to_announced_gate",
+      "source": "mock",
+      "provider": null,
+      "model": null,
+      "usage": null,
+      "observation": {
+        "passengerId": "DEMO-1",
+        "time": 13,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "currentActivity": "awaiting_recovery",
+        "traits": {
+          "consequenceSensitivity": 0.95,
+          "safetyMarginSeconds": 120,
+          "familiarity": 0.9
+        },
+        "needs": {
+          "fatigue": 0.15180555555555555
+        },
+        "knowledge": {
+          "publishedGate": "a_1",
+          "revision": 1,
+          "boardReads": 0,
+          "waits": 0,
+          "confidence": 0.9,
+          "lastSource": "gate_announcement"
+        },
+        "constraints": {
+          "walkingSpeedMps": 1.2,
+          "stepFreeRequired": false,
+          "maxWaitSeconds": 30,
+          "synthetic": true
+        },
+        "flight": {
+          "id": "demo-flight",
+          "publishedGateNodeId": "a_1",
+          "publishedStatus": "scheduled",
+          "scheduledDepartureSeconds": 241,
+          "secondsToDeparture": 228
+        },
+        "routeEstimate": {
+          "seconds": 100,
+          "metres": 120
+        },
+        "allowedActions": [
+          "go_to_announced_gate",
+          "read_board",
+          "wait"
+        ],
+        "previousResults": []
+      }
+    },
+    {
+      "sequence": 10,
+      "time": 13,
+      "passengerId": "DEMO-2",
+      "type": "proposed",
+      "detail": "Bounded action proposed for validation.",
+      "source": "mock",
+      "action": "read_board"
+    },
+    {
+      "sequence": 11,
+      "time": 13,
+      "passengerId": "DEMO-2",
+      "type": "accepted",
+      "detail": "Low familiarity: verify the published board before moving.",
+      "action": "read_board",
+      "source": "mock",
+      "provider": null,
+      "model": null,
+      "usage": null,
+      "observation": {
+        "passengerId": "DEMO-2",
+        "time": 13,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "currentActivity": "awaiting_recovery",
+        "traits": {
+          "consequenceSensitivity": 0.8,
+          "safetyMarginSeconds": 90,
+          "familiarity": 0.2
+        },
+        "needs": {
+          "fatigue": 0.25180555555555556
+        },
+        "knowledge": {
+          "publishedGate": "a_1",
+          "revision": 1,
+          "boardReads": 0,
+          "waits": 0,
+          "confidence": 0.2,
+          "lastSource": "gate_announcement"
+        },
+        "constraints": {
+          "walkingSpeedMps": 1.2,
+          "stepFreeRequired": false,
+          "maxWaitSeconds": 30,
+          "synthetic": true
+        },
+        "flight": {
+          "id": "demo-flight",
+          "publishedGateNodeId": "a_1",
+          "publishedStatus": "scheduled",
+          "scheduledDepartureSeconds": 241,
+          "secondsToDeparture": 228
+        },
+        "routeEstimate": {
+          "seconds": 100,
+          "metres": 120
+        },
+        "allowedActions": [
+          "go_to_announced_gate",
+          "read_board",
+          "wait"
+        ],
+        "previousResults": []
+      }
+    },
+    {
+      "sequence": 12,
+      "time": 13,
+      "passengerId": "DEMO-3",
+      "type": "proposed",
+      "detail": "Bounded action proposed for validation.",
+      "source": "mock",
+      "action": "wait",
+      "seconds": 15
+    },
+    {
+      "sequence": 13,
+      "time": 13,
+      "passengerId": "DEMO-3",
+      "type": "accepted",
+      "detail": "The estimated walk still leaves the preferred margin; take a short pause.",
+      "action": "wait",
+      "seconds": 15,
+      "source": "mock",
+      "provider": null,
+      "model": null,
+      "usage": null,
+      "observation": {
+        "passengerId": "DEMO-3",
+        "time": 13,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "currentActivity": "awaiting_recovery",
+        "traits": {
+          "consequenceSensitivity": 0.35,
+          "safetyMarginSeconds": 30,
+          "familiarity": 0.7
+        },
+        "needs": {
+          "fatigue": 0.5018055555555555
+        },
+        "knowledge": {
+          "publishedGate": "a_1",
+          "revision": 1,
+          "boardReads": 0,
+          "waits": 0,
+          "confidence": 0.7,
+          "lastSource": "gate_announcement"
+        },
+        "constraints": {
+          "walkingSpeedMps": 1.2,
+          "stepFreeRequired": false,
+          "maxWaitSeconds": 30,
+          "synthetic": true
+        },
+        "flight": {
+          "id": "demo-flight",
+          "publishedGateNodeId": "a_1",
+          "publishedStatus": "scheduled",
+          "scheduledDepartureSeconds": 241,
+          "secondsToDeparture": 228
+        },
+        "routeEstimate": {
+          "seconds": 100,
+          "metres": 120
+        },
+        "allowedActions": [
+          "go_to_announced_gate",
+          "read_board",
+          "wait"
+        ],
+        "previousResults": []
+      }
+    },
+    {
+      "sequence": 14,
+      "time": 16,
+      "passengerId": "DEMO-2",
+      "type": "completed",
+      "detail": "Published board checked; location unchanged.",
+      "action": "read_board"
+    },
+    {
+      "sequence": 15,
+      "time": 16,
+      "passengerId": "DEMO-2",
+      "type": "observation",
+      "detail": "Action result received; choose the next permitted action."
+    },
+    {
+      "sequence": 16,
+      "time": 16,
+      "passengerId": "DEMO-2",
+      "type": "proposed",
+      "detail": "Bounded action proposed for validation.",
+      "source": "mock",
+      "action": "go_to_announced_gate"
+    },
+    {
+      "sequence": 17,
+      "time": 16,
+      "passengerId": "DEMO-2",
+      "type": "accepted",
+      "detail": "Move to the published gate using the existing route.",
+      "action": "go_to_announced_gate",
+      "source": "mock",
+      "provider": null,
+      "model": null,
+      "usage": null,
+      "observation": {
+        "passengerId": "DEMO-2",
+        "time": 16,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "currentActivity": "awaiting_recovery",
+        "traits": {
+          "consequenceSensitivity": 0.8,
+          "safetyMarginSeconds": 90,
+          "familiarity": 0.2
+        },
+        "needs": {
+          "fatigue": 0.25222222222222224
+        },
+        "knowledge": {
+          "publishedGate": "a_1",
+          "revision": 1,
+          "boardReads": 1,
+          "waits": 0,
+          "confidence": 0.98,
+          "lastSource": "published_board"
+        },
+        "constraints": {
+          "walkingSpeedMps": 1.2,
+          "stepFreeRequired": false,
+          "maxWaitSeconds": 30,
+          "synthetic": true
+        },
+        "flight": {
+          "id": "demo-flight",
+          "publishedGateNodeId": "a_1",
+          "publishedStatus": "scheduled",
+          "scheduledDepartureSeconds": 241,
+          "secondsToDeparture": 225
+        },
+        "routeEstimate": {
+          "seconds": 100,
+          "metres": 120
+        },
+        "allowedActions": [
+          "go_to_announced_gate",
+          "read_board",
+          "wait"
+        ],
+        "previousResults": [
+          {
+            "sequence": 14,
+            "time": 16,
+            "passengerId": "DEMO-2",
+            "type": "completed",
+            "detail": "Published board checked; location unchanged.",
+            "action": "read_board"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 18,
+      "time": 28,
+      "passengerId": "DEMO-3",
+      "type": "completed",
+      "detail": "Bounded wait completed; location unchanged.",
+      "action": "wait"
+    },
+    {
+      "sequence": 19,
+      "time": 28,
+      "passengerId": "DEMO-3",
+      "type": "observation",
+      "detail": "Action result received; choose the next permitted action."
+    },
+    {
+      "sequence": 20,
+      "time": 28,
+      "passengerId": "DEMO-3",
+      "type": "proposed",
+      "detail": "Bounded action proposed for validation.",
+      "source": "mock",
+      "action": "go_to_announced_gate"
+    },
+    {
+      "sequence": 21,
+      "time": 28,
+      "passengerId": "DEMO-3",
+      "type": "accepted",
+      "detail": "Move to the published gate using the existing route.",
+      "action": "go_to_announced_gate",
+      "source": "mock",
+      "provider": null,
+      "model": null,
+      "usage": null,
+      "observation": {
+        "passengerId": "DEMO-3",
+        "time": 28,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "currentActivity": "awaiting_recovery",
+        "traits": {
+          "consequenceSensitivity": 0.35,
+          "safetyMarginSeconds": 30,
+          "familiarity": 0.7
+        },
+        "needs": {
+          "fatigue": 0.5038888888888889
+        },
+        "knowledge": {
+          "publishedGate": "a_1",
+          "revision": 1,
+          "boardReads": 0,
+          "waits": 1,
+          "confidence": 0.7,
+          "lastSource": "gate_announcement"
+        },
+        "constraints": {
+          "walkingSpeedMps": 1.2,
+          "stepFreeRequired": false,
+          "maxWaitSeconds": 30,
+          "synthetic": true
+        },
+        "flight": {
+          "id": "demo-flight",
+          "publishedGateNodeId": "a_1",
+          "publishedStatus": "scheduled",
+          "scheduledDepartureSeconds": 241,
+          "secondsToDeparture": 213
+        },
+        "routeEstimate": {
+          "seconds": 100,
+          "metres": 120
+        },
+        "allowedActions": [
+          "go_to_announced_gate",
+          "read_board",
+          "wait"
+        ],
+        "previousResults": [
+          {
+            "sequence": 18,
+            "time": 28,
+            "passengerId": "DEMO-3",
+            "type": "completed",
+            "detail": "Bounded wait completed; location unchanged.",
+            "action": "wait"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 22,
+      "time": 113,
+      "passengerId": "DEMO-1",
+      "type": "completed",
+      "detail": "Reached the published gate through engine movement.",
+      "action": "go_to_announced_gate"
+    },
+    {
+      "sequence": 23,
+      "time": 116,
+      "passengerId": "DEMO-2",
+      "type": "completed",
+      "detail": "Reached the published gate through engine movement.",
+      "action": "go_to_announced_gate"
+    },
+    {
+      "sequence": 24,
+      "time": 128,
+      "passengerId": "DEMO-3",
+      "type": "completed",
+      "detail": "Reached the published gate through engine movement.",
+      "action": "go_to_announced_gate"
+    }
+  ],
+  "invariants": true,
+  "recordPurpose": "Deterministic authored fixture for replay; zero external model calls."
+}

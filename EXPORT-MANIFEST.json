@@ -1,9 +1,9 @@
 {
   "schema": "passenger-demo-public-export/1",
-  "preparedAt": "2026-10-31T09:26:06.521984+00:00",
-  "status": "PUBLIC_SANITIZED_SOURCE",
-  "contentIdentity": "99778abfb451673d48d154c907289238bfad40aa5c2aefb0144b11e51554e6cb",
-  "identityMethod": "sha256 of sorted sha256 two-spaces relative-path LF records; excludes this manifest",
+  "preparedAt": "2026-10-31T09:56:48.764257+00:00",
+  "status": "PUBLIC_SANITIZED_FINAL_CANDIDATE",
+  "contentIdentity": "30c78144f6389abae3134a92436a79954536270c5fe57af15e6acedc5f0e5594",
+  "identityMethod": "sha256 of sorted sha256 two-spaces relative-path LF records; excludes this manifest andgitmetadata",
   "files": [
     {
       "path": ".gitignore",
@@ -12,8 +12,13 @@
     },
     {
       "path": "AUDIT.md",
-      "bytes": 3806,
-      "sha256": "ce7ad1c3d3fb759b8e3edf586afe9e47c85d231c8a890b5135e6d8a97c4483ff"
+      "bytes": 3020,
+      "sha256": "4726bb970cf1b9bc82105e0285ce4a01b33af09d91eee555fc71ef32a2fcef0a"
+    },
+    {
+      "path": "INSPECTOR-CONTRACT.md",
+      "bytes": 2499,
+      "sha256": "0fe0c394f935be365b2326e4cbe353fa9b572141f6ccdf9a6f33a86a202cd52d"
     },
     {
       "path": "NOTICE.md",
@@ -22,18 +27,158 @@
     },
     {
       "path": "PROVIDER-CONTRACT.md",
-      "bytes": 6482,
-      "sha256": "ab2d55cc435f95ba7c62a3307e4280850cc133a637668a71dbb83d4dd0d2219a"
+      "bytes": 9996,
+      "sha256": "a97b880ab4a59b9a5edc977684783da551a8a34af6a644e5f2228d653aa008d1"
     },
     {
       "path": "README.md",
-      "bytes": 4223,
-      "sha256": "8a4742d35ceb0edb919538388b6e6478df00fbdf4ac9c90a3565fac39c830b55"
+      "bytes": 5813,
+      "sha256": "c4712ad5606e559c386a5d856666087cf634c8ab6e8c48c321df83ee6d4d5ffa"
+    },
+    {
+      "path": "REPLAY-CONTRACT.md",
+      "bytes": 3004,
+      "sha256": "c44d3b9c7fd7b232753b3e32e61b9bdc0c165065a63672f1416eeb75096a95a7"
+    },
+    {
+      "path": "daytona/.gitignore",
+      "bytes": 87,
+      "sha256": "52feadc7b84101a2c797efb484dc95e426ad205bc89b2735ba3980f89bc5cfac"
+    },
+    {
+      "path": "daytona/README.md",
+      "bytes": 7620,
+      "sha256": "de02a8b75b18834636d700c3b77f884a701e17389cc8a9767cd90ff02941fd7d"
+    },
+    {
+      "path": "daytona/artifacts/README.md",
+      "bytes": 218,
+      "sha256": "34d7361796c45ed823e971ed1617d104acc3a9155d1f2667c3dc62ff40d347cf"
+    },
+    {
+      "path": "daytona/bundle.mjs",
+      "bytes": 1424,
+      "sha256": "3fad2cc79996e512e8e5502053b7fd4c5d7f1046cb2c41b5a7ce48bfb7013097"
+    },
+    {
+      "path": "daytona/cli.mjs",
+      "bytes": 3560,
+      "sha256": "7402f72fdbc78a4e068116cefaca2a352afc558ab410bd4033c06f14ee773f8a"
+    },
+    {
+      "path": "daytona/engine-manifest.json",
+      "bytes": 1080,
+      "sha256": "15685288a6897769fa6bfca5e9fa2128c3ebb00970a188194925a7730e049522"
+    },
+    {
+      "path": "daytona/evidence/authored-mock-run.json",
+      "bytes": 13407,
+      "sha256": "53307a509899bb925cb4d85da0fae0e2cde4645c02cba38b52775a78c87ad74d"
+    },
+    {
+      "path": "daytona/evidence/daytona-run.json",
+      "bytes": 14523,
+      "sha256": "2052496766719047c2930d2905c8c2ad555e21e5cb5d46bcc71dc5aa6f51d92b"
+    },
+    {
+      "path": "daytona/evidence/recorded-trace.json",
+      "bytes": 1728,
+      "sha256": "3045adf0c35de618682d3ca78b9b903271809fcc3b547ef16af881deeb611085"
+    },
+    {
+      "path": "daytona/evidence/report.html",
+      "bytes": 2879,
+      "sha256": "6eae9a3def600aa0701e5c790e0421d7c38baf34faaeb2cbf95eeac6687d4ae9"
+    },
+    {
+      "path": "daytona/evidence/source-record.json",
+      "bytes": 2550,
+      "sha256": "da779ee34ebc96cc8c311ddaef12807777e17eb6f774b889f2647eb650bf2826"
+    },
+    {
+      "path": "daytona/package-lock.json",
+      "bytes": 83584,
+      "sha256": "801aba4d6b54a2ea34b91778d788017f7a51cfaa25162a43150924946e5553dc"
+    },
+    {
+      "path": "daytona/package.json",
+      "bytes": 297,
+      "sha256": "b16311b7e86d3cc635d71c44746ebda11967048628fd70a0bff1f83395b80d6d"
+    },
+    {
+      "path": "daytona/sandbox-entry.mjs",
+      "bytes": 528,
+      "sha256": "54999e613b2317fb317f5c3fea08bc481e4f8f425c430bc09443a52a9aa0a393"
+    },
+    {
+      "path": "daytona/scenario.mjs",
+      "bytes": 7936,
+      "sha256": "7534f0dd94149994d17fbb471bc41c172883c2c7213548ab8f9ef46e48fa8b34"
+    },
+    {
+      "path": "daytona/tests/runner.test.mjs",
+      "bytes": 5010,
+      "sha256": "49e29024b23da9209dd4bf37f44963061ecd7d069e79d7b43a5d1cc375e193d0"
+    },
+    {
+      "path": "daytona/transport.mjs",
+      "bytes": 3439,
+      "sha256": "38c6d97f13532e727349227e17e4a4113b3abc5df44cc3744351aa3420e6b33f"
+    },
+    {
+      "path": "daytona/vendor/gate-agent-demo.js",
+      "bytes": 16404,
+      "sha256": "4a5cebf31d900ee203b421d78758b1c0a27bfa662f98981fc3e297e4eaf06380"
+    },
+    {
+      "path": "daytona/vendor/holding-layout.js",
+      "bytes": 733,
+      "sha256": "9f37f1322d17bb603ec738f035abe1bc40e58bf58ff2a40fd7a506089c2370fa"
+    },
+    {
+      "path": "daytona/vendor/recovery-simulation.js",
+      "bytes": 78735,
+      "sha256": "82d9362e7e789176da33bf60395c49a8ad74a67cc89f8ad2ff5a2720556b2531"
+    },
+    {
+      "path": "daytona/vendor/recovery-world.js",
+      "bytes": 69852,
+      "sha256": "206d0b233c45385b3eac9839363f9b258e0658aa19210d6b5b920458688cefee"
+    },
+    {
+      "path": "daytona/vendor/simulation.js",
+      "bytes": 36883,
+      "sha256": "83b8624799b21a4c265056b1516f5d25aa421cc4afd7c6af821cbb472263be1a"
+    },
+    {
+      "path": "daytona/vendor/synthetic-graph.js",
+      "bytes": 594,
+      "sha256": "a1ff74c5dfe535be85ee995ad336ea560fc894488a3228da039594d2e35ee21d"
     },
     {
       "path": "docs/demo-preview.png",
       "bytes": 449465,
       "sha256": "03124df4a47da53a6fe71f4b11fb0d387302e15344f4d76d3ca52bb2480a17e5"
+    },
+    {
+      "path": "docs/live-run.png",
+      "bytes": 197053,
+      "sha256": "37489db3978ad95687cad654f6d7e1a502cc43e5115273d74e078942af69632f"
+    },
+    {
+      "path": "docs/scale-view.png",
+      "bytes": 359593,
+      "sha256": "6fa5e20b44e4918d946ac0dc8b649f8422b14119296837c708e84e3db51324f2"
+    },
+    {
+      "path": "fixtures/mock-run.json",
+      "bytes": 16935,
+      "sha256": "bd71e7bf9628629d6635f193e0f55b043f6f4db6edfd1f8a63c9f94651b95e7a"
+    },
+    {
+      "path": "fixtures/nosana-live-run.json",
+      "bytes": 14902,
+      "sha256": "201ae2447802f0181fe6033cbd8b692a3e1b61142c56664ae574ed065fe2e1da"
     },
     {
       "path": "package.json",
@@ -42,33 +187,53 @@
     },
     {
       "path": "server.py",
-      "bytes": 21123,
-      "sha256": "e276bf27c28c86a7ce91fe159145b4c025e871546c449f53124b997830262102"
+      "bytes": 33957,
+      "sha256": "11b28729f415b14247340afd2195932e38d06e7fe4fc8acf7a797dc9a97abe21"
     },
     {
       "path": "tests/gate-agent.test.mjs",
-      "bytes": 15339,
-      "sha256": "98d742a12417172d071ff975e61343ccd4ebc1c285409c2a58331fdf95c2c660"
+      "bytes": 17698,
+      "sha256": "d8ecdd0ac201e807731deedec3a4e1f2dda1f4d79ff8d823708ad129691a094a"
     },
     {
       "path": "tests/test_server.py",
-      "bytes": 17644,
-      "sha256": "3346da32aed090559ddab96615a985f6b2f2cf768acec633a1f8236f14f10e69"
+      "bytes": 26805,
+      "sha256": "75c7fa142dc471431571f69f253b5de5479dd5038c9806de025daf39fe33bbdd"
+    },
+    {
+      "path": "web/evidence/daytona/daytona-run.json",
+      "bytes": 14523,
+      "sha256": "2052496766719047c2930d2905c8c2ad555e21e5cb5d46bcc71dc5aa6f51d92b"
+    },
+    {
+      "path": "web/evidence/daytona/recorded-trace.json",
+      "bytes": 1728,
+      "sha256": "3045adf0c35de618682d3ca78b9b903271809fcc3b547ef16af881deeb611085"
+    },
+    {
+      "path": "web/evidence/daytona/report.html",
+      "bytes": 2879,
+      "sha256": "6eae9a3def600aa0701e5c790e0421d7c38baf34faaeb2cbf95eeac6687d4ae9"
+    },
+    {
+      "path": "web/evidence/daytona/source-record.json",
+      "bytes": 2550,
+      "sha256": "da779ee34ebc96cc8c311ddaef12807777e17eb6f774b889f2647eb650bf2826"
     },
     {
       "path": "web/gate-agent-demo.js",
-      "bytes": 15734,
-      "sha256": "3d141e08505dc6ee8cf53d831079232b4d0766095ced3ecb8a281eb86a469810"
+      "bytes": 17512,
+      "sha256": "43b3d888d11902b221315ca91109cc4e07c6667f55bf75af756c0abcea362fc7"
     },
     {
       "path": "web/gate-demo-panel.css",
-      "bytes": 8670,
-      "sha256": "15a99cbbadf1fb52c6f8d5ba6d04b2c507f1578b91d13fadab63f8b261bbbd29"
+      "bytes": 8890,
+      "sha256": "21a34132bbda8e8cb773027f814aefdc7263b9ba3cda5b93cd2f21d6b17da227"
     },
     {
       "path": "web/gate-demo-panel.js",
-      "bytes": 18820,
-      "sha256": "71c8ab6feb94e4d9a939d7ebf78f93ea740dd767a6da168024f5fa0c607cb07b"
+      "bytes": 22545,
+      "sha256": "dd7af278f1b433680331f9b467400a777297d1aafc9241f9638db4d56e1a3397"
     },
     {
       "path": "web/holding-layout.js",
@@ -81,6 +246,11 @@
       "sha256": "085809ad884128f008e5086688011ad50d915516171ccc8d5c03823d7cb67419"
     },
     {
+      "path": "web/recordings/nosana-live-run.json",
+      "bytes": 14902,
+      "sha256": "201ae2447802f0181fe6033cbd8b692a3e1b61142c56664ae574ed065fe2e1da"
+    },
+    {
       "path": "web/recovery-simulation.js",
       "bytes": 78735,
       "sha256": "82d9362e7e789176da33bf60395c49a8ad74a67cc89f8ad2ff5a2720556b2531"
@@ -89,6 +259,106 @@
       "path": "web/recovery-world.js",
       "bytes": 69852,
       "sha256": "206d0b233c45385b3eac9839363f9b258e0658aa19210d6b5b920458688cefee"
+    },
+    {
+      "path": "web/scale-lab/INTEGRATION.md",
+      "bytes": 3715,
+      "sha256": "8952efb228b5632c584339ed2ee5cd3464c32fb9bde55c61ed7bfde846ec8ec9"
+    },
+    {
+      "path": "web/scale-lab/NOTICE.md",
+      "bytes": 778,
+      "sha256": "3c5eb6398aaccca382f1d53cbf485d5053c47961047821340787bf64e2478a95"
+    },
+    {
+      "path": "web/scale-lab/PASSENGER-INSPECTOR.md",
+      "bytes": 2708,
+      "sha256": "bc1bafacc9d8dc6c8e9f9ebb6bf1ee1c1fc2de1b67052f08b0ec0acc5eb4e69e"
+    },
+    {
+      "path": "web/scale-lab/index.html",
+      "bytes": 2397,
+      "sha256": "a00e6d764c855e6c0a072c9c12489a8f335147111fb2bd071cc181eb45caaf6d"
+    },
+    {
+      "path": "web/scale-lab/macro-density.js",
+      "bytes": 1531,
+      "sha256": "93c0868b7953ad01789de6d610c72dad1f669033a4d535d15f6c541d9ba6a0fe"
+    },
+    {
+      "path": "web/scale-lab/scale-controller.js",
+      "bytes": 7555,
+      "sha256": "233c4068edf845a67cc2f5e6c64a44465c0626f6d46bf26e3ceea593cf64e57c"
+    },
+    {
+      "path": "web/scale-lab/scale-engine.js",
+      "bytes": 8304,
+      "sha256": "bbe5324fd9590f29f77dfc7b17d73223635b28b92d667d372d2c4d985cbcf30c"
+    },
+    {
+      "path": "web/scale-lab/scale-ui.js",
+      "bytes": 5626,
+      "sha256": "e2f7abfe69f7c9031b7d16e5dea9a8dbb37833a6040274ec6a9fe958af4d4334"
+    },
+    {
+      "path": "web/scale-lab/scale-worker.js",
+      "bytes": 163,
+      "sha256": "f4107fea848afe6d44735c929847a9063d3e71149a9742e23b8b1c78f43d81a0"
+    },
+    {
+      "path": "web/scale-lab/scale.css",
+      "bytes": 1961,
+      "sha256": "e822fde029023560992a6fc305cf7fb552f67804a08f4547e0d112a3388de108"
+    },
+    {
+      "path": "web/scale-lab/tests/inspector.test.mjs",
+      "bytes": 2592,
+      "sha256": "725712ea732c0a5f5afbc3eb7dc52c662775686cb79f8e52f415009bb8a6ffad"
+    },
+    {
+      "path": "web/scale-lab/tests/macro.test.mjs",
+      "bytes": 1973,
+      "sha256": "67c96ffd8a304c182fc59e3886af744bfb1148f2e5659a1fa08fec5f37df406b"
+    },
+    {
+      "path": "web/scale-lab/tests/scale.test.mjs",
+      "bytes": 5024,
+      "sha256": "fe8e136d6d5722e45b966f61a0fed8a89236a28ed9cf274b8428ce20ee42bccf"
+    },
+    {
+      "path": "web/scale-lab/vendor/gate-agent-demo.js",
+      "bytes": 15734,
+      "sha256": "3d141e08505dc6ee8cf53d831079232b4d0766095ced3ecb8a281eb86a469810"
+    },
+    {
+      "path": "web/scale-lab/vendor/holding-layout.js",
+      "bytes": 733,
+      "sha256": "9f37f1322d17bb603ec738f035abe1bc40e58bf58ff2a40fd7a506089c2370fa"
+    },
+    {
+      "path": "web/scale-lab/vendor/recovery-simulation.js",
+      "bytes": 78735,
+      "sha256": "82d9362e7e789176da33bf60395c49a8ad74a67cc89f8ad2ff5a2720556b2531"
+    },
+    {
+      "path": "web/scale-lab/vendor/recovery-world.js",
+      "bytes": 69852,
+      "sha256": "206d0b233c45385b3eac9839363f9b258e0658aa19210d6b5b920458688cefee"
+    },
+    {
+      "path": "web/scale-lab/vendor/simulation.js",
+      "bytes": 36883,
+      "sha256": "83b8624799b21a4c265056b1516f5d25aa421cc4afd7c6af821cbb472263be1a"
+    },
+    {
+      "path": "web/scale-lab/vendor/synthetic-graph.js",
+      "bytes": 594,
+      "sha256": "a1ff74c5dfe535be85ee995ad336ea560fc894488a3228da039594d2e35ee21d"
+    },
+    {
+      "path": "web/scale-lab/worker-handler.js",
+      "bytes": 1488,
+      "sha256": "3a85099bdeb6ef2f6ee9e0209c4227f62975ed02e951c6c6162b3b459f1d8aa3"
     },
     {
       "path": "web/simulation.js",
@@ -102,8 +372,8 @@
     },
     {
       "path": "web/standalone.js",
-      "bytes": 5392,
-      "sha256": "ddc3d55d1e805fa3e4b56f1b670685b2ce5ec1b456d57c7f7ecc35b3bafc1475"
+      "bytes": 5643,
+      "sha256": "6d9f4385401fe7b5df99208509ff767b8ae801d882496c20bdeaa9f703a92f25"
     },
     {
       "path": "web/synthetic-graph.js",
@@ -111,12 +381,12 @@
       "sha256": "a1ff74c5dfe535be85ee995ad336ea560fc894488a3228da039594d2e35ee21d"
     }
   ],
-  "totalBytesExcludingManifest": 766123,
+  "totalBytesExcludingManifest": 2032754,
   "exactSourceCopies": [
     {
       "path": "web/gate-agent-demo.js",
-      "sha256": "3d141e08505dc6ee8cf53d831079232b4d0766095ced3ecb8a281eb86a469810",
-      "matchesIsolatedSource": false
+      "sha256": "43b3d888d11902b221315ca91109cc4e07c6667f55bf75af756c0abcea362fc7",
+      "matchesIsolatedSource": true
     },
     {
       "path": "web/recovery-world.js",
@@ -134,33 +404,33 @@
       "matchesIsolatedSource": true
     }
   ],
-  "sourceAdapterReplacement": "web/holding-layout.js is newly authored semantic-only display adapter",
-  "graph": "web/synthetic-graph.js; new invented120m corridor",
+  "privacyEdits": [
+    "Generic synthetic-model notice/comment replaced personal narrative in retained engine andscalevendor."
+  ],
+  "sourceAdapterReplacement": "Semantic-only display adapter; original airport holding/formation data excluded.",
+  "graph": "Invented120m publiccorridor; localA3assets/route excluded.",
   "tests": {
-    "nodePassed": 13,
-    "nodeFailed": 0,
-    "pythonPassed": 23,
-    "pythonFailed": 0,
-    "externalProviderCalls": 0
+    "publicControllerPassed": 16,
+    "proxyPassed": 32,
+    "daytonaPassed": 8,
+    "scalePassed": 11
   },
   "renderedBrowserReview": {
-    "status": "verified_local",
-    "at": "2026-10-31T09:16:49.730239+00:00",
-    "sameAchievedTime": 241,
-    "agentArrivals": [
+    "publicLiveArrivals": [
       113,
       116,
-      128
-    ],
-    "baselineArrivals": [
-      113,
-      113,
       113
     ],
-    "syntheticDeparturesPerArm": 3
+    "publicLiveAccepted": 4,
+    "publicLiveFallbacks": 0,
+    "daytonaResultMatchesLocal": true,
+    "daytonaCleanup": "deleted",
+    "daytonaNewInferenceCalls": 0,
+    "scalePopulation": 1500,
+    "scaleLiveLLM": 0,
+    "scaleSelectedId": "DEMO-1500",
+    "scaleSharedInspectorClock": true,
+    "replayMode": "recorded Nosana actions; zero new model calls"
   },
-  "publicationPerformedByExportTask": false,
-  "privacyEdits": [
-    "Removed personal narrative from a legacy engine notice and comment; synthetic behavior disclaimer retained."
-  ]
+  "publishedOriginalAirportAssets": false
 }

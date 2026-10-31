@@ -1,0 +1,6 @@
+node_modules/
+.env*
+*runtime*.json
+*credentials*.json
+artifacts/*
+!artifacts/README.md

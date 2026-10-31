@@ -1,0 +1,93 @@
+{
+  "schema": "hia.daytona.recorded-source/1",
+  "sourceArtifact": "public-export/fixtures/nosana-live-run.json",
+  "sourceArtifactSha256": "201ae2447802f0181fe6033cbd8b692a3e1b61142c56664ae574ed065fe2e1da",
+  "sourceSchema": "hia.gate-agent-demo/1",
+  "sourceCapturedSimulationTime": 241,
+  "sourcePendingDecisions": 0,
+  "sourceInvariants": true,
+  "origin": "Completed live Nosana run in the sanitised public 120m corridor.",
+  "replayGraph": "synthetic-corridor-120m-v1",
+  "sourceArrivalAndOutcomeMatch": true,
+  "notice": "Four accepted live model actions were replayed through the same engine. No fresh inference, model keys, raw summaries or private geometry were transferred.",
+  "acceptedActionEvidence": [
+    {
+      "passengerId": "DEMO-3",
+      "time": 13,
+      "action": "go_to_announced_gate",
+      "source": "live",
+      "provider": "Nosana hosted inference",
+      "model": "qwen/qwen3.8-27b",
+      "usage": {
+        "prompt_tokens": 630,
+        "completion_tokens": 249,
+        "total_tokens": 879
+      }
+    },
+    {
+      "passengerId": "DEMO-1",
+      "time": 13,
+      "action": "go_to_announced_gate",
+      "source": "live",
+      "provider": "Nosana hosted inference",
+      "model": "qwen/qwen3.8-27b",
+      "usage": {
+        "prompt_tokens": 632,
+        "completion_tokens": 254,
+        "total_tokens": 886
+      }
+    },
+    {
+      "passengerId": "DEMO-2",
+      "time": 13,
+      "action": "read_board",
+      "source": "live",
+      "provider": "Nosana hosted inference",
+      "model": "qwen/qwen3.8-27b",
+      "usage": {
+        "prompt_tokens": 630,
+        "completion_tokens": 352,
+        "total_tokens": 982
+      }
+    },
+    {
+      "passengerId": "DEMO-2",
+      "time": 16,
+      "action": "go_to_announced_gate",
+      "source": "live",
+      "provider": "Nosana hosted inference",
+      "model": "qwen/qwen3.8-27b",
+      "usage": {
+        "prompt_tokens": 678,
+        "completion_tokens": 256,
+        "total_tokens": 934
+      }
+    }
+  ],
+  "originalPassengerOutcomes": [
+    {
+      "id": "DEMO-1",
+      "arrivedAt": 113,
+      "state": "modeled_departed",
+      "outcome": "synthetic_departed"
+    },
+    {
+      "id": "DEMO-2",
+      "arrivedAt": 116,
+      "state": "modeled_departed",
+      "outcome": "synthetic_departed"
+    },
+    {
+      "id": "DEMO-3",
+      "arrivedAt": 113,
+      "state": "modeled_departed",
+      "outcome": "synthetic_departed"
+    }
+  ],
+  "sourceCounts": {
+    "live": 4,
+    "fallback": 0,
+    "mock": 0
+  },
+  "replayArtifact": "daytona-run.json"
+}

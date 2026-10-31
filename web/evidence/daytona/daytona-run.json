@@ -1,0 +1,535 @@
+{
+  "schema": "hia.daytona.execution/1",
+  "execution": {
+    "provider": "Daytona",
+    "status": "live_verified",
+    "sandboxName": "hia-replay-797e4b7a-5e5",
+    "sandboxId": "b2a0c319-48c8-437f-8628-d928fd899029",
+    "startedAt": "2026-10-31T09:40:13.427Z",
+    "finishedAt": "2026-10-31T09:40:22.852Z",
+    "phase": "download",
+    "cleanup": "deleted",
+    "policy": {
+      "snapshot": "daytona-small",
+      "language": "javascript",
+      "public": false,
+      "networkBlockAll": true,
+      "autoStopInterval": 2,
+      "autoDeleteInterval": 0,
+      "ttlMinutes": 5,
+      "ephemeral": true,
+      "labels": {
+        "purpose": "hia-synthetic-replay"
+      }
+    },
+    "creditCapUsd": 0.01,
+    "estimatedFiveMinuteComputeMemoryUsd": 0.005549999999999999,
+    "billingActualUsd": null,
+    "billingNote": "Estimate only. Single small sandbox, 5 minute TTL. No billing API measurement or provider dollar-cap guarantee.",
+    "bundleHash": "32025b89a7e141ca010c736299dc50afaa141eaacc5712d402acf5ba90698947",
+    "resultMatchesLocal": true,
+    "resources": {
+      "cpu": 1,
+      "memoryGiB": 1,
+      "diskGiB": 3
+    },
+    "exitCode": 0
+  },
+  "result": {
+    "schema": "hia.daytona.comparison/1",
+    "synthetic": true,
+    "calibrated": false,
+    "graphId": "synthetic-corridor-120m-v1",
+    "traceHash": "20014c30450bb49ee39cab0900cc5aa9fe22af5cd256a0cb9dc58184a3b4cfae",
+    "traceProvenance": "recorded_live",
+    "inferenceExecuted": false,
+    "externalModelCalls": 0,
+    "operation": "recorded_action_replay",
+    "recordedActions": [
+      {
+        "passengerId": "DEMO-3",
+        "time": 13,
+        "action": {
+          "type": "go_to_announced_gate"
+        },
+        "source": "live"
+      },
+      {
+        "passengerId": "DEMO-1",
+        "time": 13,
+        "action": {
+          "type": "go_to_announced_gate"
+        },
+        "source": "live"
+      },
+      {
+        "passengerId": "DEMO-2",
+        "time": 13,
+        "action": {
+          "type": "read_board"
+        },
+        "source": "live"
+      },
+      {
+        "passengerId": "DEMO-2",
+        "time": 16,
+        "action": {
+          "type": "go_to_announced_gate"
+        },
+        "source": "live"
+      }
+    ],
+    "sourceCounts": {
+      "live": 4,
+      "fallback": 0,
+      "mock": 0
+    },
+    "inputs": {
+      "seed": 42,
+      "walkingSpeedMps": 1.2,
+      "oldGate": "a_0",
+      "newGate": "a_1",
+      "changeAt": 11,
+      "announcementAt": 13,
+      "departureAt": 241
+    },
+    "profiles": [
+      {
+        "id": "DEMO-1",
+        "name": "Alex",
+        "color": "#12b8a6",
+        "traits": {
+          "consequenceSensitivity": 0.95,
+          "safetyMarginSeconds": 120,
+          "familiarity": 0.9
+        },
+        "needs": {
+          "fatigue": 0.15
+        }
+      },
+      {
+        "id": "DEMO-2",
+        "name": "Sam",
+        "color": "#e8a13d",
+        "traits": {
+          "consequenceSensitivity": 0.8,
+          "safetyMarginSeconds": 90,
+          "familiarity": 0.2
+        },
+        "needs": {
+          "fatigue": 0.25
+        }
+      },
+      {
+        "id": "DEMO-3",
+        "name": "Jo",
+        "color": "#a78bfa",
+        "traits": {
+          "consequenceSensitivity": 0.35,
+          "safetyMarginSeconds": 30,
+          "familiarity": 0.7
+        },
+        "needs": {
+          "fatigue": 0.5
+        }
+      }
+    ],
+    "baseline": {
+      "policy": "existing_baseline",
+      "time": 260,
+      "invariants": true,
+      "passengers": [
+        {
+          "id": "DEMO-1",
+          "arrivedAt": 113,
+          "state": "modeled_departed",
+          "outcome": "synthetic_departed",
+          "position": [
+            120,
+            0,
+            0
+          ],
+          "decisionCount": 0,
+          "lastAction": "go_to_announced_gate"
+        },
+        {
+          "id": "DEMO-2",
+          "arrivedAt": 113,
+          "state": "modeled_departed",
+          "outcome": "synthetic_departed",
+          "position": [
+            120,
+            0,
+            0
+          ],
+          "decisionCount": 0,
+          "lastAction": "go_to_announced_gate"
+        },
+        {
+          "id": "DEMO-3",
+          "arrivedAt": 113,
+          "state": "modeled_departed",
+          "outcome": "synthetic_departed",
+          "position": [
+            120,
+            0,
+            0
+          ],
+          "decisionCount": 0,
+          "lastAction": "go_to_announced_gate"
+        }
+      ],
+      "log": [
+        {
+          "sequence": 1,
+          "time": 1,
+          "passengerId": null,
+          "type": "run_ready",
+          "detail": "Same seed, speeds, profiles and published information in both arms."
+        },
+        {
+          "sequence": 2,
+          "time": 13,
+          "passengerId": "DEMO-1",
+          "type": "announcement",
+          "detail": "Published gate changed from a_0 to a_1."
+        },
+        {
+          "sequence": 3,
+          "time": 13,
+          "passengerId": "DEMO-2",
+          "type": "announcement",
+          "detail": "Published gate changed from a_0 to a_1."
+        },
+        {
+          "sequence": 4,
+          "time": 13,
+          "passengerId": "DEMO-3",
+          "type": "announcement",
+          "detail": "Published gate changed from a_0 to a_1."
+        },
+        {
+          "sequence": 5,
+          "time": 13,
+          "passengerId": "DEMO-1",
+          "type": "accepted",
+          "detail": "Bounded engine action",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 6,
+          "time": 13,
+          "passengerId": "DEMO-2",
+          "type": "accepted",
+          "detail": "Bounded engine action",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 7,
+          "time": 13,
+          "passengerId": "DEMO-3",
+          "type": "accepted",
+          "detail": "Bounded engine action",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 8,
+          "time": 113,
+          "passengerId": "DEMO-1",
+          "type": "completed",
+          "detail": "Reached the published gate through engine movement.",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 9,
+          "time": 113,
+          "passengerId": "DEMO-2",
+          "type": "completed",
+          "detail": "Reached the published gate through engine movement.",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 10,
+          "time": 113,
+          "passengerId": "DEMO-3",
+          "type": "completed",
+          "detail": "Reached the published gate through engine movement.",
+          "action": "go_to_announced_gate"
+        }
+      ]
+    },
+    "agent": {
+      "policy": "recorded_action_replay",
+      "time": 260,
+      "invariants": true,
+      "passengers": [
+        {
+          "id": "DEMO-1",
+          "arrivedAt": 113,
+          "state": "modeled_departed",
+          "outcome": "synthetic_departed",
+          "position": [
+            120,
+            0,
+            0
+          ],
+          "decisionCount": 1,
+          "lastAction": "go_to_announced_gate"
+        },
+        {
+          "id": "DEMO-2",
+          "arrivedAt": 116,
+          "state": "modeled_departed",
+          "outcome": "synthetic_departed",
+          "position": [
+            120,
+            0,
+            0
+          ],
+          "decisionCount": 2,
+          "lastAction": "go_to_announced_gate"
+        },
+        {
+          "id": "DEMO-3",
+          "arrivedAt": 113,
+          "state": "modeled_departed",
+          "outcome": "synthetic_departed",
+          "position": [
+            120,
+            0,
+            0
+          ],
+          "decisionCount": 1,
+          "lastAction": "go_to_announced_gate"
+        }
+      ],
+      "log": [
+        {
+          "sequence": 1,
+          "time": 1,
+          "passengerId": null,
+          "type": "run_ready",
+          "detail": "Same seed, speeds, profiles and published information in both arms."
+        },
+        {
+          "sequence": 2,
+          "time": 13,
+          "passengerId": "DEMO-1",
+          "type": "announcement",
+          "detail": "Published gate changed from a_0 to a_1."
+        },
+        {
+          "sequence": 3,
+          "time": 13,
+          "passengerId": "DEMO-2",
+          "type": "announcement",
+          "detail": "Published gate changed from a_0 to a_1."
+        },
+        {
+          "sequence": 4,
+          "time": 13,
+          "passengerId": "DEMO-3",
+          "type": "announcement",
+          "detail": "Published gate changed from a_0 to a_1."
+        },
+        {
+          "sequence": 5,
+          "time": 13,
+          "passengerId": "DEMO-1",
+          "type": "observation",
+          "detail": "Gate-change announcement received."
+        },
+        {
+          "sequence": 6,
+          "time": 13,
+          "passengerId": "DEMO-2",
+          "type": "observation",
+          "detail": "Gate-change announcement received."
+        },
+        {
+          "sequence": 7,
+          "time": 13,
+          "passengerId": "DEMO-3",
+          "type": "observation",
+          "detail": "Gate-change announcement received."
+        },
+        {
+          "sequence": 8,
+          "time": 13,
+          "passengerId": "DEMO-1",
+          "type": "proposed",
+          "detail": "Bounded action proposed for validation.",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 9,
+          "time": 13,
+          "passengerId": "DEMO-1",
+          "type": "accepted",
+          "detail": "Bounded engine action",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 10,
+          "time": 13,
+          "passengerId": "DEMO-2",
+          "type": "proposed",
+          "detail": "Bounded action proposed for validation.",
+          "action": "read_board"
+        },
+        {
+          "sequence": 11,
+          "time": 13,
+          "passengerId": "DEMO-2",
+          "type": "accepted",
+          "detail": "Bounded engine action",
+          "action": "read_board"
+        },
+        {
+          "sequence": 12,
+          "time": 13,
+          "passengerId": "DEMO-3",
+          "type": "proposed",
+          "detail": "Bounded action proposed for validation.",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 13,
+          "time": 13,
+          "passengerId": "DEMO-3",
+          "type": "accepted",
+          "detail": "Bounded engine action",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 14,
+          "time": 16,
+          "passengerId": "DEMO-2",
+          "type": "completed",
+          "detail": "Published board checked; location unchanged.",
+          "action": "read_board"
+        },
+        {
+          "sequence": 15,
+          "time": 16,
+          "passengerId": "DEMO-2",
+          "type": "observation",
+          "detail": "Action result received; choose the next permitted action."
+        },
+        {
+          "sequence": 16,
+          "time": 16,
+          "passengerId": "DEMO-2",
+          "type": "proposed",
+          "detail": "Bounded action proposed for validation.",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 17,
+          "time": 16,
+          "passengerId": "DEMO-2",
+          "type": "accepted",
+          "detail": "Bounded engine action",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 18,
+          "time": 113,
+          "passengerId": "DEMO-1",
+          "type": "completed",
+          "detail": "Reached the published gate through engine movement.",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 19,
+          "time": 113,
+          "passengerId": "DEMO-3",
+          "type": "completed",
+          "detail": "Reached the published gate through engine movement.",
+          "action": "go_to_announced_gate"
+        },
+        {
+          "sequence": 20,
+          "time": 116,
+          "passengerId": "DEMO-2",
+          "type": "completed",
+          "detail": "Reached the published gate through engine movement.",
+          "action": "go_to_announced_gate"
+        }
+      ]
+    },
+    "comparison": [
+      {
+        "passengerId": "DEMO-1",
+        "baselineArrivalSeconds": 113,
+        "agentArrivalSeconds": 113,
+        "arrivalDeltaSeconds": 0
+      },
+      {
+        "passengerId": "DEMO-2",
+        "baselineArrivalSeconds": 113,
+        "agentArrivalSeconds": 116,
+        "arrivalDeltaSeconds": 3
+      },
+      {
+        "passengerId": "DEMO-3",
+        "baselineArrivalSeconds": 113,
+        "agentArrivalSeconds": 113,
+        "arrivalDeltaSeconds": 0
+      }
+    ],
+    "note": "Same engine, graph, seed, walking speed, profiles and published information. Positive delta means replay arrived later. No claim of agent superiority."
+  },
+  "sourceFiles": [
+    {
+      "path": "vendor/gate-agent-demo.js",
+      "bytes": 16404,
+      "sha256": "4a5cebf31d900ee203b421d78758b1c0a27bfa662f98981fc3e297e4eaf06380"
+    },
+    {
+      "path": "vendor/recovery-world.js",
+      "bytes": 69852,
+      "sha256": "206d0b233c45385b3eac9839363f9b258e0658aa19210d6b5b920458688cefee"
+    },
+    {
+      "path": "vendor/recovery-simulation.js",
+      "bytes": 78735,
+      "sha256": "82d9362e7e789176da33bf60395c49a8ad74a67cc89f8ad2ff5a2720556b2531"
+    },
+    {
+      "path": "vendor/simulation.js",
+      "bytes": 36883,
+      "sha256": "83b8624799b21a4c265056b1516f5d25aa421cc4afd7c6af821cbb472263be1a"
+    },
+    {
+      "path": "vendor/holding-layout.js",
+      "bytes": 733,
+      "sha256": "9f37f1322d17bb603ec738f035abe1bc40e58bf58ff2a40fd7a506089c2370fa"
+    },
+    {
+      "path": "vendor/synthetic-graph.js",
+      "bytes": 594,
+      "sha256": "a1ff74c5dfe535be85ee995ad336ea560fc894488a3228da039594d2e35ee21d"
+    },
+    {
+      "path": "scenario.mjs",
+      "bytes": 7936,
+      "sha256": "7534f0dd94149994d17fbb471bc41c172883c2c7213548ab8f9ef46e48fa8b34"
+    },
+    {
+      "path": "sandbox-entry.mjs",
+      "bytes": 528,
+      "sha256": "54999e613b2317fb317f5c3fea08bc481e4f8f425c430bc09443a52a9aa0a393"
+    },
+    {
+      "path": "package.json",
+      "bytes": 17,
+      "sha256": "6dc1b06d6b093e9cccb20bee06a93836eee0420ae26803ca2ce4065d82f070d1"
+    },
+    {
+      "path": "trace.json",
+      "bytes": 1099,
+      "sha256": "20014c30450bb49ee39cab0900cc5aa9fe22af5cd256a0cb9dc58184a3b4cfae"
+    }
+  ]
+}

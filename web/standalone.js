@@ -9,7 +9,7 @@ const time=t=>`${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,'0')}`;
 const label=s=>String(s??'').replaceAll('_',' ');
 function refresh(){
   const state=controller.gateDemoState();
-  $('scene-mode').textContent=state.mode==='baseline'?'Baseline · existing automatic policy':state.policy==='mock'?'Agent · deterministic demo policy':state.providerStatus==='live_response_received'?'Agent · live response received':state.providerStatus==='fallback'?'Agent · deterministic fallback recorded':'Agent · live requested, unverified';
+  $('scene-mode').textContent=state.mode==='baseline'?'Baseline · existing automatic policy':state.policy==='mock'?'Agent · deterministic demo policy':state.policy==='replay'?'Agent · recorded Nosana replay, no new calls':state.providerStatus==='live_response_received'?'Agent · live response received':state.providerStatus==='fallback'?'Agent · deterministic fallback recorded':'Agent · live requested, unverified';
   $('scene-time').textContent='T+'+time(state.time);
   $('left-gate-title').textContent=state.announced?'ORIGINAL GATE':'GATE 1';
   $('right-gate-title').textContent=state.announced?'NEW GATE':'GATE 2';
@@ -24,7 +24,7 @@ function refresh(){
       const initial=document.createElementNS(svgNS,'text');initial.setAttribute('text-anchor','middle');initial.setAttribute('y','4');initial.setAttribute('fill','#fff');initial.setAttribute('font-size','11');initial.setAttribute('font-weight','600');initial.textContent=p.name[0];group.appendChild(initial);
       const name=document.createElementNS(svgNS,'text');name.setAttribute('class','passenger-name');name.setAttribute('x','0');name.setAttribute('y','-20');name.setAttribute('text-anchor','middle');name.textContent=p.name;group.appendChild(name);
       const title=document.createElementNS(svgNS,'title');group.appendChild(title);
-      group.addEventListener('click',()=>{focused=p.id;refresh();});group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focused=p.id;refresh();}});
+      group.addEventListener('click',()=>{focused=p.id;panel.selectPassenger(p.id);refresh();});group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focused=p.id;panel.selectPassenger(p.id);refresh();}});
       $('passenger-markers').appendChild(group);groups.set(p.id,group);
     }
     const metres=Math.max(0,Math.min(120,p.position?.[0]??120));group.setAttribute('transform',`translate(${100+metres/120*620} ${130+i*50})`);group.classList.toggle('is-focused',focused===p.id);group.querySelector('title').textContent=`${p.name}: ${label(p.state)}; ${metres.toFixed(1)} m along the corridor.`;
@@ -49,4 +49,4 @@ function tick(now){const dt=Math.min(.15,Math.max(0,(now-lastTime)/1000));lastTi
 refresh();frameId=requestAnimationFrame(tick);
 addEventListener('pagehide',()=>{cancelAnimationFrame(frameId);controller.dispose();panel.dispose();},{once:true});
 // Bounded inspection surface for reproducible local verification; no credentials or arbitrary execution API.
-window.__PASSENGER_DEMO={getState:()=>controller.gateDemoState(),getSnapshot:()=>controller.snapshot(),refresh};
+window.__PASSENGER_DEMO={getState:()=>controller.gateDemoState(),getExport:()=>controller.exportDemo(),getInspectorState:()=>panel.getState(),selectPassenger:id=>panel.selectPassenger(id),getSnapshot:()=>controller.snapshot(),refresh};

@@ -1,0 +1,1 @@
+Generated evidence belongs here. Local results prove only local replay. A Daytona envelope must say live_verified with resultMatchesLocal:true and cleanup:deleted before describing the sandbox integration as verified.

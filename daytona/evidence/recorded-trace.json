@@ -1,0 +1,90 @@
+{
+  "schema": "hia.daytona.replay/1",
+  "graphId": "synthetic-corridor-120m-v1",
+  "provenance": "recorded_live",
+  "profiles": [
+    {
+      "id": "DEMO-1",
+      "name": "Alex",
+      "color": "#12b8a6",
+      "traits": {
+        "consequenceSensitivity": 0.95,
+        "safetyMarginSeconds": 120,
+        "familiarity": 0.9
+      },
+      "needs": {
+        "fatigue": 0.15
+      }
+    },
+    {
+      "id": "DEMO-2",
+      "name": "Sam",
+      "color": "#e8a13d",
+      "traits": {
+        "consequenceSensitivity": 0.8,
+        "safetyMarginSeconds": 90,
+        "familiarity": 0.2
+      },
+      "needs": {
+        "fatigue": 0.25
+      }
+    },
+    {
+      "id": "DEMO-3",
+      "name": "Jo",
+      "color": "#a78bfa",
+      "traits": {
+        "consequenceSensitivity": 0.35,
+        "safetyMarginSeconds": 30,
+        "familiarity": 0.7
+      },
+      "needs": {
+        "fatigue": 0.5
+      }
+    }
+  ],
+  "inputs": {
+    "seed": 42,
+    "walkingSpeedMps": 1.2,
+    "oldGate": "a_0",
+    "newGate": "a_1",
+    "changeAt": 11,
+    "announcementAt": 13,
+    "departureAt": 241
+  },
+  "horizonSeconds": 260,
+  "actions": [
+    {
+      "passengerId": "DEMO-3",
+      "time": 13,
+      "action": {
+        "type": "go_to_announced_gate"
+      },
+      "source": "live"
+    },
+    {
+      "passengerId": "DEMO-1",
+      "time": 13,
+      "action": {
+        "type": "go_to_announced_gate"
+      },
+      "source": "live"
+    },
+    {
+      "passengerId": "DEMO-2",
+      "time": 13,
+      "action": {
+        "type": "read_board"
+      },
+      "source": "live"
+    },
+    {
+      "passengerId": "DEMO-2",
+      "time": 16,
+      "action": {
+        "type": "go_to_announced_gate"
+      },
+      "source": "live"
+    }
+  ]
+}

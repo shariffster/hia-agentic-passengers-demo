@@ -103,7 +103,72 @@ class ValidationTests(unittest.TestCase):
         with ThreadPoolExecutor(max_workers=20) as pool:
             results = list(pool.map(attempt, range(100)))
         self.assertEqual(sum(results), 30)
-        self.assertEqual(budget.public_status(), {"requestCap": 30, "upstreamAttempts": 30, "remainingRequests": 0})
+        self.assertEqual({k: budget.public_status()[k] for k in ("requestCap", "upstreamAttempts", "remainingRequests")}, {"requestCap": 30, "upstreamAttempts": 30, "remainingRequests": 0})
+
+    def test_usage_validation_and_exact_model_pricing(self):
+        good = {"prompt_tokens": 1000, "completion_tokens": 100, "total_tokens": 1100, "private": "ignored"}
+        self.assertEqual(server_module.validated_usage(good), {k: good[k] for k in ("prompt_tokens", "completion_tokens", "total_tokens")})
+        for bad in (None, {}, {**good, "prompt_tokens": -1}, {**good, "completion_tokens": True}, {**good, "total_tokens": 1.2}):
+            self.assertIsNone(server_module.validated_usage(bad))
+        known = server_module.ProviderConfig(endpoint="https://inference.nosana.com/v1/chat/completions", protocol="openai_compatible", model="qwen/qwen3.8-27b")
+        self.assertEqual(known.verified_price_rates(), {"inputPerMillionUSD": .2, "outputPerMillionUSD": 2.0})
+        self.assertIsNone(server_module.ProviderConfig(endpoint="https://example.org/infer", protocol="openai_compatible", model="qwen/qwen3.8-27b").verified_price_rates())
+        self.assertIsNone(server_module.ProviderConfig(endpoint=known.endpoint, protocol="openai_compatible", model="unknown").verified_price_rates())
+
+    def test_usage_tallied_before_action_validation_and_missing_usage_is_explicit(self):
+        config = server_module.ProviderConfig(endpoint="https://inference.nosana.com/v1/chat/completions", protocol="openai_compatible", model="qwen/qwen3.8-27b")
+        budget = server_module.RequestBudget(price_rates=config.verified_price_rates())
+        usage = {"prompt_tokens": 1000, "completion_tokens": 100, "total_tokens": 1100}
+        responses = [
+            {"choices": [{"message": {"content": '{"action":{"type":"read_board"}}'}}], "usage": usage},
+            {"choices": [{"message": {"content": 'invalid action JSON'}}], "usage": usage},
+            {"choices": [{"message": {"content": '{"action":{"type":"read_board"}}'}}]},
+        ]
+        with patch.object(server_module, "build_opener") as opener:
+            response = opener.return_value.open.return_value.__enter__.return_value
+            response.read.side_effect = [json.dumps(v).encode() for v in responses]
+            result = server_module.call_provider(config, request_fixture(), budget)
+            self.assertEqual(result["usage"], usage)
+            self.assertEqual(result["model"], "qwen/qwen3.8-27b")
+            with self.assertRaises(server_module.ProviderFailure):
+                server_module.call_provider(config, request_fixture(), budget)
+            self.assertIsNone(server_module.call_provider(config, request_fixture(), budget)["usage"])
+        status = budget.public_status()
+        self.assertEqual(status["responsesWithUsage"], 2)
+        self.assertEqual(status["responsesWithoutUsage"], 1)
+        self.assertEqual(status["reportedTokens"], {k: v * 2 for k, v in usage.items()})
+        self.assertAlmostEqual(status["estimatedCostUSD"], .0008)
+        self.assertTrue(status["costEstimateIncomplete"])
+
+    def test_truncated_output_is_explicit_and_usage_is_still_recorded(self):
+        config = server_module.ProviderConfig(endpoint="https://example.org/infer", protocol="openai_compatible", model="fixture-model")
+        budget = server_module.RequestBudget()
+        payload = {"choices": [{"finish_reason": "length", "message": {"content": "incomplete"}}], "usage": {"prompt_tokens": 500, "completion_tokens": 1024, "total_tokens": 1524}}
+        with patch.object(server_module, "build_opener") as opener:
+            opener.return_value.open.return_value.__enter__.return_value.read.return_value = json.dumps(payload).encode()
+            with self.assertRaises(server_module.ProviderFailure) as caught:
+                server_module.call_provider(config, request_fixture(), budget)
+            self.assertEqual(caught.exception.code, "provider_output_truncated")
+            request = opener.return_value.open.call_args.args[0]
+            self.assertEqual(json.loads(request.data)["max_tokens"], 1024)
+            self.assertEqual(opener.return_value.open.call_args.kwargs["timeout"], 40)
+        self.assertEqual(budget.public_status()["reportedTokens"]["completion_tokens"], 1024)
+
+    def test_no_think_advisory_is_only_sent_to_exact_selected_nosana_model(self):
+        cases = [
+            ("https://inference.nosana.com/v1/chat/completions", "qwen/qwen3.8-27b", True),
+            ("https://inference.nosana.com/v1/chat/completions", "another-model", False),
+            ("https://example.org/v1/chat/completions", "qwen/qwen3.8-27b", False),
+            ("https://inference.nosana.com.example.org/v1/chat/completions", "qwen/qwen3.8-27b", False),
+        ]
+        for endpoint, model, expected in cases:
+            config = server_module.ProviderConfig(endpoint=endpoint, protocol="openai_compatible", model=model)
+            with patch.object(server_module, "build_opener") as opener:
+                opener.return_value.open.return_value.__enter__.return_value.read.return_value = b'{"choices":[{"message":{"content":"{\\"action\\":{\\"type\\":\\"read_board\\"}}"}}]}'
+                server_module.call_provider(config, request_fixture())
+                payload = json.loads(opener.return_value.open.call_args.args[0].data)
+                self.assertEqual(payload["messages"][0]["content"].endswith("/no_think"), expected)
+                self.assertEqual(payload["max_tokens"], 1024)
 
     def test_missing_config_does_not_consume_attempt_but_upstream_failure_does(self):
         budget = server_module.RequestBudget(2)
@@ -115,6 +180,7 @@ class ValidationTests(unittest.TestCase):
             with self.assertRaises(server_module.ProviderFailure):
                 server_module.call_provider(server_module.ProviderConfig(endpoint="https://example.org/infer"), request_fixture(), budget)
         self.assertEqual(budget.attempts, 1)
+        self.assertTrue(budget.public_status()["costEstimateIncomplete"])
 
 
 class ProtectedConfigTests(unittest.TestCase):
@@ -156,6 +222,80 @@ class ProtectedConfigTests(unittest.TestCase):
             with self.assertRaises(ValueError) as caught:
                 server_module.ProviderConfig.from_protected_file(self.file, self.web)
             self.assertNotIn("fixture-only-key", str(caught.exception))
+
+
+class PersistentLedgerTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.web = self.root / "web"; self.web.mkdir()
+        self.path = self.root / "usage.json"
+        self.rates = {"inputPerMillionUSD": .2, "outputPerMillionUSD": 2.0}
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def ledger(self, limit=30, reserve=0):
+        return server_module.PersistentRequestBudget(self.path, self.web, limit, self.rates, reserve)
+
+    def test_reservation_persists_across_restart_and_missing_usage_keeps_bound(self):
+        first = self.ledger(limit=2)
+        attempt = first.reserve()
+        self.assertAlmostEqual(first.public_status()["guardEstimatedCostUSD"], .010048)
+        self.assertEqual(self.path.stat().st_mode & 0o777, 0o600)
+        restarted = self.ledger(limit=2)
+        self.assertEqual(restarted.public_status()["upstreamAttempts"], 1)
+        restarted.record_response_usage(None, attempt)
+        self.assertEqual(restarted.public_status()["responsesWithoutUsage"], 1)
+        self.assertAlmostEqual(restarted.public_status()["guardEstimatedCostUSD"], .010048)
+        restarted.reserve()
+        with self.assertRaises(server_module.ProviderFailure) as caught:
+            self.ledger(limit=30).reserve()
+        self.assertEqual(caught.exception.code, "request_limit_reached")
+
+    def test_reported_usage_reconciles_estimate_and_initial_reserve_cannot_be_reset(self):
+        ledger = self.ledger(reserve=1)
+        attempt = ledger.reserve()
+        ledger.record_response_usage({"prompt_tokens": 1000, "completion_tokens": 100, "total_tokens": 1100}, attempt)
+        status = self.ledger(reserve=0).public_status()
+        self.assertAlmostEqual(status["estimatedCostUSD"], .0004)
+        self.assertAlmostEqual(status["guardEstimatedCostUSD"], 1.0004)
+        self.assertEqual(status["initialSpendReserveUSD"], 1)
+
+    def test_dollar_guard_rejects_before_attempt_and_concurrent_process_objects_share_cap(self):
+        ledger = self.ledger(reserve=8.999)
+        with self.assertRaises(server_module.ProviderFailure) as caught:
+            ledger.reserve()
+        self.assertEqual(caught.exception.code, "estimated_spend_limit_reached")
+        self.assertEqual(ledger.public_status()["upstreamAttempts"], 0)
+        self.path = self.root / "concurrent-usage.json"
+        ledgers = [self.ledger(limit=3) for _ in range(8)]
+        def attempt(budget):
+            try:
+                budget.reserve(); return True
+            except server_module.ProviderFailure:
+                return False
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            self.assertEqual(sum(pool.map(attempt, ledgers)), 3)
+        self.assertEqual(self.ledger().public_status()["upstreamAttempts"], 3)
+
+    def test_permissions_corruption_and_inside_web_fail_closed(self):
+        ledger = self.ledger()
+        self.path.chmod(0o644)
+        with self.assertRaises(server_module.ProviderFailure):
+            ledger.reserve()
+        self.path.chmod(0o600); self.path.write_text("corrupt")
+        with self.assertRaises(server_module.ProviderFailure):
+            self.ledger()
+        with self.assertRaises(ValueError):
+            server_module.PersistentRequestBudget(self.web / "usage.json", self.web, 30, self.rates)
+
+    def test_missing_existing_ledger_fails_closed_instead_of_resetting_budget(self):
+        ledger = self.ledger(); ledger.reserve(); self.path.unlink()
+        with self.assertRaises(server_module.ProviderFailure):
+            ledger.reserve()
+        with self.assertRaises(server_module.ProviderFailure):
+            self.ledger()
 
 
 class HTTPTests(unittest.TestCase):

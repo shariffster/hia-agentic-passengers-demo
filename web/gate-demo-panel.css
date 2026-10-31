@@ -3,3 +3,5 @@
 @media(max-width:1050px){.gate-demo-panel{width:328px;right:12px;top:100px;bottom:119px}.gd-header{padding:13px 14px 11px}.gd-body{padding:12px 13px}.gd-header h2{font-size:20px}}
 @media(max-width:600px){.gate-demo-panel{top:auto;bottom:126px;right:10px;left:10px;width:auto;max-width:none;max-height:50svh;border-radius:10px}.gd-header{padding:10px 12px}.gd-header h2{font-size:19px}.gd-eyebrow{font-size:8px;margin-bottom:3px}.gd-body{padding:10px 12px}.gate-demo-panel.is-collapsed{left:auto;width:auto;max-width:calc(100% - 20px)}.gate-demo-panel.is-collapsed .gd-eyebrow{display:none}.gate-demo-panel button{min-height:36px}.gate-demo-panel .gd-small-actions button{min-height:33px}.gd-policy-row select{min-height:34px}.gd-traits input{min-height:32px}.gd-log-meta span{max-width:145px}}
 @media(prefers-reduced-motion:reduce){.gate-demo-panel *{scroll-behavior:auto!important}}
+
+.gate-demo-panel .gd-person-name{border:0;background:transparent;text-align:left;padding:0;min-height:24px;font-size:12px;font-weight:600}.gd-passenger.gd-selected{outline:2px solid var(--gd-person);outline-offset:1px}

@@ -1,49 +1,59 @@
 # Three passengers, one gate change
 
-A small, inspectable passenger decision experiment. Three authored profiles receive the same gate announcement. A baseline reroutes automatically; agent mode chooses among `go_to_announced_gate`, `read_board` and a bounded `wait`. The existing event engine executes each accepted action and returns its outcome.
+An inspectable passenger decision experiment: three authored profiles hear the same announcement, choose a bounded action, and receive an engine outcome. Compare the existing automatic baseline with an authored deterministic policy, fresh Nosana inference, or a clearly labeled recording replay.
 
-This public version uses a new **synthetic 120 m corridor**, rendered with SVG. The separate HIA 3D scene, airport datasets and visual assets are not included. It is not a calibrated model of real passengers or airport operations.
+This public reproduction uses an invented **120 m corridor**. The separate local HIA 3D demo uses furnished A3 scenery; its airport assets, historical datasets and staging geometry are excluded. These are software experiments, not calibrated passenger behavior.
 
-![Baseline and agent comparison in the synthetic corridor](docs/demo-preview.png)
+![Completed live Nosana run on the synthetic corridor](docs/live-run.png)
 
-## Run locally
+## Run
 
-Requirements: Python 3.10+ and a modern browser. Node.js 22+ is needed only for the JavaScript tests. There are no npm dependencies or build steps.
+Python 3.10+ and a modern browser; no build or npm install is needed for the browser demo. Node 22+ runs the tests. The optional Daytona command-line runner has its own SDK dependency.
 
 ```sh
 python3 -B server.py --port 58741
 ```
 
-Open **http://127.0.0.1:58741/** on the same computer. The server is deliberately loopback-only; this address is not a public deployment.
+Open **http://127.0.0.1:58741/** on that computer. This is a loopback preview, not a public deployment.
 
-1. Keep **Agent → Deterministic demo policy** selected and click **Run gate change**.
-2. Click **Play** or **Run to outcome**. Inspect each passenger and the decision/action log.
-3. Switch to **Baseline**, which resets the same inputs. Run to the same achieved time to compare the retained results.
-4. Edit profile values and press **Restart** to create a new run. Both arms must use matching inputs for a controlled comparison.
+- **Recorded Nosana replay** reproduces the included real decisions without a new inference call. It restores the recording's profiles.
+- **Deterministic demo policy** uses explicitly authored rules; no model is called.
+- **Live model** requires your own authorized server-side configuration. Successful responses and fallbacks are labeled separately.
+- Click **Run gate change**, then **Play** or **Run to outcome**. Click a passenger name or marker to inspect its profile, observed state, proposal, validation, result and timestamps.
+- Edit consequence sensitivity, safety margin or familiarity, then **Restart**. Edits affect the next run; they never rewrite an in-flight observation. Both comparison arms must use matching inputs.
+- Choose **Baseline** and run to the same achieved time. No agent improvement is presumed.
 
-The default deterministic policy produces a direct walk, a board check followed by walking, and a short wait followed by walking. Those differences are explicitly authored rules, not live model inference. Baseline and mock agent runs both achieve three synthetic departures in the default scenario; no improvement is presumed.
+## Verified sponsor roles
 
-## Optional live inference
+**Nosana supplies bounded decisions.** The included [live recording](fixtures/nosana-live-run.json) contains four accepted responses from `qwen/qwen3.8-27b`, zero fallbacks: Alex and Jo went to the announced gate; Sam read the board, received completion, then went. Arrivals were113/116/113s, with three synthetic departures at241s. Fresh model decisions can differ; seed42 controls the engine, not remote inference. Brief declared summaries are not internal thought traces.
 
-No credential is included or required for deterministic mode. The server supports a provider-neutral JSON endpoint and an OpenAI-compatible endpoint. Configuration is held server-side; browser requests never contain a provider credential. See [PROVIDER-CONTRACT.md](PROVIDER-CONTRACT.md) for request/response fields and configuration names.
+**Daytona executes reproducible experiments.** A real sandbox replayed those recorded actions through the pinned engine, matching local and original arrivals/outcomes. It performed no fresh model inference and was deleted after verification. See the [receipt](daytona/evidence/daytona-run.json), [source record](daytona/evidence/source-record.json), [minimal trace](daytona/evidence/recorded-trace.json), and [runner instructions](daytona/README.md). The local UI links to the rendered evidence report.
 
-Nosana hosted inference is one optional provider, with an OpenAI-compatible `/v1/chat/completions` endpoint and available model names from `/v1/models`. A user's own authorized account, inference credential, available model and credits are needed. See [Nosana's hosted inference documentation](https://learn.nosana.com/llm/). This repository does not create accounts, buy credits, deploy GPU jobs or claim sponsor integration is configured.
+## Optional 1,500-passenger scale view
 
-“Configured” is not proof of connectivity. The interface reports successful live responses, missing configuration, invalid actions and deterministic fallbacks separately. Declared decision summaries are displayed explanations, not evidence of internal model reasoning.
+Open **http://127.0.0.1:58741/scale-lab/**. A separate browser worker runs1,500 stateful rule-controlled cases,500 copies of each authored profile, with **zero live LLM agents**. Its visualization displays counted position bins, not1,500 independently rendered bodies. Select any ID throughDEMO-1500; density and inspector share the same achieved clock. Play/pause, reset, baseline and final outcomes were browser-checked. No crowd collisions, empirical behavior or safe-capacity claim is made.
 
-## Test
+![Optional rule-controlled scale view](docs/scale-view.png)
+
+## Live configuration and bounds
+
+The proxy supports a provider-neutral JSON endpoint or OpenAI-compatible chat completions. Credentials stay server-side and are absent from this repo. See [PROVIDER-CONTRACT.md](PROVIDER-CONTRACT.md) for protected configuration fields, action schema and local ledger flags. [Nosana's documentation](https://learn.nosana.com/llm/) explains account authorization, current served models and token billing.
+
+For the verified selected Nosana model, use the optional private persistent usage ledger across all preview processes. It retains a30-attempt cap, conservative missing-usage reservations and a$9 local estimated-spend guard across restarts. A new ledger needs an explicit reserve for earlier calls. It is not the provider's account balance or a provider-enforced billing cap. Never commit the configuration or ledger.
+
+The engine holds simulated time while a live decision is pending. Requests have a40-second upstream timeout and1,024-token output limit. Invalid, missing or timed-out responses produce explicit deterministic fallback. Responses cannot execute code or supply arbitrary destinations. Recording replay does not require credentials or network access to a model.
+
+## Verification
 
 ```sh
 node --test tests/gate-agent.test.mjs
-python3 -B -m unittest discover -s tests -p 'test_server.py' -v
+python3 -B -m unittest discover -s tests -p 'test_server.py' -q
+node --test daytona/tests/*.test.mjs
+node --test web/scale-lab/tests/*.mjs
 ```
 
-Controller tests cover equal initial inputs, real movement following decisions, redecision after action results, repeated announcements, invalid actions, missing endpoints, timeouts, stale runs and replies, bounded waits, published-information observations and case/resource invariants. Proxy tests use mocks and temporary loopback servers, not external services.
+16 controller tests,32 proxy tests,8 Daytona lifecycle/replay tests and11 scale tests pass. Tests cover fair inputs, real movement, action completion and redecision, invalid actions, missing endpoints, timeouts, reset/stale replies, bounded waits, published-only observations, profile edits, recorded replay and resource invariants. Proxy tests use mocks/local listeners; the separately recorded live evidence identifies real external calls.
 
-The simulation owns one clock. It pauses while a model decision is pending. Responses cannot execute code or supply arbitrary destinations. The controller validates action shape, allowed actions, time bounds and run/request identity before execution.
+See [REPLAY-CONTRACT.md](REPLAY-CONTRACT.md), [INSPECTOR-CONTRACT.md](INSPECTOR-CONTRACT.md), [AUDIT.md](AUDIT.md), [NOTICE.md](NOTICE.md) and [EXPORT-MANIFEST.json](EXPORT-MANIFEST.json). The Daytona vendor files remain pinned to the exact revision executed in its receipt; subsequent browser replay/UI additions do not rewrite that historical evidence.
 
-## Source boundary
-
-The controller and three underlying engine modules are copied unchanged from the isolated local demo. A new `holding-layout.js` adapter exposes semantic positions only, replacing the airport's display layouts. A new three-node graph supplies the invented corridor. See [NOTICE.md](NOTICE.md), [EXPORT-MANIFEST.json](EXPORT-MANIFEST.json) and [AUDIT.md](AUDIT.md).
-
-No licence grant is added by this export. Existing notices remain in the retained source. Public availability for review should not be read as a blanket licence for the separate airport project, its assets, brands or third-party material.
+No new license grant is added. Public review access does not grant rights to the separate airport project, assets, brands or third-party material.

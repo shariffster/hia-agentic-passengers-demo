@@ -1,0 +1,16 @@
+{
+  "name": "hia-daytona-scenario-runner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "local": "node cli.mjs local"
+  },
+  "dependencies": {
+    "@daytona/sdk": "0.226.0"
+  }
+}

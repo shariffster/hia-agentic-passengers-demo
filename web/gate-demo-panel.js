@@ -23,24 +23,26 @@ export function mountGateDemoPanel({start, getController, focus, setRepresentati
     <div id="gd-body" class="gd-body">
       <p class="gd-intro">A gate changes. Watch three passengers act on the same announcement.</p>
       <div class="gd-tabs" role="group" aria-label="Controller"><button type="button" data-mode="baseline" aria-pressed="false">Baseline</button><button type="button" data-mode="agent" aria-pressed="true">Agent</button></div>
-      <div class="gd-policy-row"><label for="gd-policy">Decision source</label><select id="gd-policy"><option value="mock">Deterministic demo policy</option><option value="live" disabled>Live model · not configured</option></select></div>
+      <div class="gd-policy-row"><label for="gd-policy">Decision source</label><select id="gd-policy"><option value="mock">Deterministic demo policy</option><option value="replay">Recorded Nosana replay · no new calls</option><option value="live" disabled>Live model · not configured</option></select></div>
       <div class="gd-status" role="status"><span class="gd-status-dot"></span><span id="gd-source-status">Deterministic demo policy · no model call</span><button id="gd-check" type="button" title="Check endpoint configuration">↻</button></div>
       <div class="gd-scenario"><div><span>Published gate</span><strong id="gd-gate">Before announcement</strong></div><div><span>Simulation time</span><strong id="gd-clock">0:00</strong></div></div>
       <p id="gd-clock-note" class="gd-clock-note">The same seed, profiles and event are used in both arms.</p>
       <div class="gd-actions"><button id="gd-announce" class="gd-primary" type="button">Run gate change</button><button id="gd-restart" type="button">Restart</button></div>
       <div class="gd-small-actions"><button id="gd-step10" type="button">+10 sec</button><button id="gd-step60" type="button">+60 sec</button><button id="gd-frame" type="button">Frame corridor</button><button id="gd-export" type="button">Export</button></div>
-      <div class="gd-view-row"><span>View</span><button type="button" data-view="scene" aria-pressed="true">Schematic</button><button type="button" data-view="flow" aria-pressed="false">Flow</button><span id="gd-departure">Departure —</span></div>
+      <button id="gd-finish" type="button" style="width:100%;margin-top:6px">To departure · matched comparison time</button><div class="gd-view-row"><span>View</span><button type="button" data-view="scene" aria-pressed="true">Schematic</button><button type="button" data-view="flow" aria-pressed="false">Flow</button><span id="gd-departure">Departure —</span></div>
       <p id="gd-error" class="gd-error" role="alert" hidden></p>
       <section class="gd-passengers" aria-label="Passenger inspectors"><div class="gd-section-title"><h3>Three authored profiles</h3><span>Inspect or focus</span></div><div id="gd-passenger-list"><p class="gd-empty">Start the experiment to inspect passengers.</p></div></section>
       <details class="gd-comparison"><summary>Baseline / agent comparison</summary><div id="gd-comparison-body"><p class="gd-empty">Run each arm to retain its achieved results here.</p></div></details>
       <section class="gd-log-section"><div class="gd-section-title"><h3>Decision &amp; action log</h3><span id="gd-log-count">0 events</span></div><p class="gd-log-help">Declared decision summaries and engine outcomes. These are not internal thought traces.</p><ol id="gd-log" class="gd-log"><li class="gd-empty">No gate-change decisions yet.</li></ol></section>
-      <footer class="gd-footer">Illustrative profiles · synthetic scenario · synthetic gate nodes. This demonstrates a decision loop, not calibrated passenger behavior.</footer>
+      <footer class="gd-footer"><p><a href="./evidence/daytona/report.html" target="_blank" rel="noopener">Daytona replay evidence</a> · <a href="./scale-lab/" target="_blank" rel="noopener">1,500 rule-agent scale view</a></p>Illustrative profiles · synthetic scenario · synthetic gate nodes. This demonstrates a decision loop, not calibrated passenger behavior.</footer>
     </div>`;
   (document.getElementById('experience') ?? document.body).appendChild(root);
   const $ = selector => root.querySelector(selector);
   let mode = 'agent', policy = 'mock', busy = false, disposed = false, lastState = null, lastLogKey = '', lastRunId = '', lastProfileKey = '', endpoint = null, checkBusy = false;
   const retained = {baseline:null,agent:null};
   const cards = new Map();
+  let selectedPassengerId=null;
+  function selectPassenger(id){if(!cards.has(id))return false;selectedPassengerId=id;for(const [key,card] of cards){card.classList.toggle('gd-selected',key===id);card.querySelector('.gd-person-details').open=key===id;}cards.get(id).scrollIntoView({block:'nearest',behavior:'smooth'});return true;}
   const error = message => { $('#gd-error').textContent = message ?? ''; $('#gd-error').hidden = !message; };
   const controller = () => getController?.() ?? null;
   const state = () => controller()?.gateDemoState?.() ?? null;
@@ -74,8 +76,9 @@ export function mountGateDemoPanel({start, getController, focus, setRepresentati
   };
   const reset = async () => {
     remember(state());
-    const profiles = readProfiles();
-    await start?.({mode,policy, ...(profiles ? {profiles} : {})});
+    let profiles = readProfiles(),recording;
+    if(policy==='replay'){const response=await fetch('./recordings/nosana-live-run.json');if(!response.ok)throw Error('Recorded run is unavailable.');recording=await response.json();profiles=recording.profiles;}
+    await start?.({mode,policy,...(recording?{recording}:{}), ...(profiles ? {profiles} : {})});
     lastRunId = ''; lastProfileKey = ''; lastLogKey = ''; render();
   };
   for (const button of root.querySelectorAll('[data-mode]')) button.addEventListener('click', () => task(async () => {
@@ -90,6 +93,7 @@ export function mountGateDemoPanel({start, getController, focus, setRepresentati
     await controller()?.announce?.();
   }));
   for (const [id,seconds] of [['#gd-step10',10],['#gd-step60',60]]) $(id).addEventListener('click', () => task(async () => { await controller()?.step?.(seconds); }));
+  $('#gd-finish').addEventListener('click',()=>task(async()=>{if(!controller()?.gateDemoState)await reset();const active=controller(),target=active.gateDemoState().departureAt;for(let n=0;n<300&&controller()===active&&active.getTime()<target;n++){active.step(Math.min(10,target-active.getTime()));await active.resolveDecisions();}}));
   $('#gd-frame').addEventListener('click', () => { frame?.(); refresh?.(); });
   for (const button of root.querySelectorAll('[data-view]')) button.addEventListener('click', () => {
     setRepresentation?.(button.dataset.view);
@@ -130,8 +134,9 @@ export function mountGateDemoPanel({start, getController, focus, setRepresentati
   function makeCard(p, i) {
     const card = document.createElement('article'); card.className = 'gd-passenger'; card.dataset.passengerId = p.id;
     card.style.setProperty('--gd-person',color(p.color ?? ['#a13c52','#337f88','#a76d26'][i]));
-    card.innerHTML = `<div class="gd-person-top"><span class="gd-person-dot"></span><strong class="gd-person-name"></strong><button class="gd-follow" type="button">Focus</button></div><div class="gd-person-state"></div><div class="gd-person-result"></div><details class="gd-person-details"><summary>Profile &amp; observation</summary><div class="gd-traits"><label>Missed-flight consequence <input data-trait="consequenceSensitivity" type="number" min="0" max="1" step="0.1"></label><label>Safety margin (seconds) <input data-trait="safetyMarginSeconds" type="number" min="0" max="180" step="15"></label><label>Airport familiarity <input data-trait="familiarity" type="number" min="0" max="1" step="0.1"></label></div><p class="gd-edit-note">Authored values; edits apply on Restart in either arm.</p><dl><dt>Current needs</dt><dd class="gd-needs"></dd><dt>Known gate</dt><dd class="gd-known-gate"></dd><dt>Info confidence</dt><dd class="gd-confidence"></dd><dt>Walking speed</dt><dd class="gd-speed"></dd><dt>Last action</dt><dd class="gd-last-action"></dd><dt>Decisions</dt><dd class="gd-decision-count"></dd></dl></details>`;
-    card.querySelector('.gd-follow').addEventListener('click', () => { focus?.(p.id); refresh?.(); });
+    card.innerHTML = `<div class="gd-person-top"><span class="gd-person-dot"></span><button class="gd-person-name" type="button" title="Inspect this passenger"></button><button class="gd-follow" type="button">Focus</button></div><div class="gd-person-state"></div><div class="gd-person-result"></div><details class="gd-person-details"><summary>Profile &amp; observation</summary><div class="gd-traits"><label>Missed-flight consequence <input data-trait="consequenceSensitivity" type="number" min="0" max="1" step="0.1"></label><label>Safety margin (seconds) <input data-trait="safetyMarginSeconds" type="number" min="0" max="180" step="15"></label><label>Airport familiarity <input data-trait="familiarity" type="number" min="0" max="1" step="0.1"></label></div><p class="gd-edit-note">Authored values; edits apply on Restart. Replay restores its recorded profiles.</p><dl><dt>Controller</dt><dd class="gd-controller"></dd><dt>Observed at</dt><dd class="gd-observed"></dd><dt>Position</dt><dd class="gd-position"></dd><dt>Proposed action</dt><dd class="gd-proposed"></dd><dt>Validation</dt><dd class="gd-validation"></dd><dt>Applied result</dt><dd class="gd-applied"></dd><dt>Decision summary</dt><dd class="gd-summary"></dd><dt>Current needs</dt><dd class="gd-needs"></dd><dt>Known gate</dt><dd class="gd-known-gate"></dd><dt>Info confidence</dt><dd class="gd-confidence"></dd><dt>Walking speed</dt><dd class="gd-speed"></dd><dt>Last action</dt><dd class="gd-last-action"></dd><dt>Decisions</dt><dd class="gd-decision-count"></dd></dl></details>`;
+    card.querySelector('.gd-person-name').addEventListener('click',()=>selectPassenger(p.id));
+    card.querySelector('.gd-follow').addEventListener('click', () => { selectPassenger(p.id);focus?.(p.id); refresh?.(); });
     cards.set(p.id,card); return card;
   }
   function renderComparison(s) {
@@ -147,7 +152,7 @@ export function mountGateDemoPanel({start, getController, focus, setRepresentati
       if (kind === 'departed') return ps.filter(p => /departed/.test(p.outcome ?? p.state ?? '') && !/not_departed/.test(p.outcome ?? p.state ?? '')).length + ' / ' + ps.length;
       return clock(x.time);
     };
-    $('#gd-comparison-body').innerHTML = `<table><thead><tr><th>Achieved result</th><th>Baseline</th><th>Agent</th></tr></thead><tbody><tr><th>Time</th><td>${metric(a,'time')}</td><td>${metric(b,'time')}</td></tr><tr><th>At new gate</th><td>${metric(a,'arrived')}</td><td>${metric(b,'arrived')}</td></tr><tr><th>Departed</th><td>${metric(a,'departed')}</td><td>${metric(b,'departed')}</td></tr></tbody></table><p class="gd-comparison-note">${!a||!b?'Run the other arm to retain a comparison.':matched?'Matched initial inputs. Compare at the same achieved time; no improvement is presumed.':'Inputs differ. Restart both arms with matching profiles before comparing.'}</p>${b?`<p class="gd-comparison-note">Agent source: ${b.policy==='live'?'live requested; inspect log for fallbacks':'deterministic demo policy'}.</p>`:''}`;
+    $('#gd-comparison-body').innerHTML = `<table><thead><tr><th>Achieved result</th><th>Baseline</th><th>Agent</th></tr></thead><tbody><tr><th>Time</th><td>${metric(a,'time')}</td><td>${metric(b,'time')}</td></tr><tr><th>At new gate</th><td>${metric(a,'arrived')}</td><td>${metric(b,'arrived')}</td></tr><tr><th>Departed</th><td>${metric(a,'departed')}</td><td>${metric(b,'departed')}</td></tr></tbody></table><p class="gd-comparison-note">${!a||!b?'Run the other arm to retain a comparison.':matched?'Matched initial inputs. Compare at the same achieved time; no improvement is presumed.':'Inputs differ. Restart both arms with matching profiles before comparing.'}</p>${b?`<p class="gd-comparison-note">Agent source: ${b.policy==='live'?'live requested; inspect log for fallbacks':b.policy==='replay'?'recorded Nosana replay; zero new inference calls':'deterministic demo policy'}.</p>`:''}`;
   }
   function render() {
     if (disposed) return;
@@ -160,10 +165,11 @@ export function mountGateDemoPanel({start, getController, focus, setRepresentati
     const fallback = entries.some(e=>/fallback/i.test(`${e.source ?? ''} ${e.type ?? ''}`));
     const live = entries.some(e=>e.source === 'live');
     const providerText = typeof s.providerStatus === 'string' ? s.providerStatus : s.providerStatus?.status ?? '';
-    let status = mode==='baseline'?'Baseline · existing automatic gate policy':policy==='mock'?'Deterministic demo policy · no model call':fallback?'Live requested · fallback recorded':live?'Live model response received':s.pendingCount?'Live request pending · clock held':'Live configured · response not yet verified';
+    let status = mode==='baseline'?'Baseline · existing automatic gate policy':policy==='mock'?'Deterministic demo policy · no model call':policy==='replay'?('Recorded Nosana replay · no new inference'+(fallback?' · fallback recorded':'')):fallback?'Live requested · fallback recorded':live?'Live model response received':s.pendingCount?'Live request pending · clock held':'Live configured · response not yet verified';
     if (policy==='live' && /missing|unavailable|timeout|error|failed/.test(providerText) && !live) status = `Live unavailable · ${words(providerText)}`;
-    $('#gd-source-status').textContent = status;
-    $('.gd-status').dataset.source = mode==='baseline'?'baseline':policy==='mock'?'mock':live&&!fallback?'live':'unverified';
+    const liveModel=entries.findLast(e=>e.source==='live'&&e.model)?.model;
+    $('#gd-source-status').textContent = status+(liveModel?' · '+liveModel:'');
+    $('.gd-status').dataset.source = mode==='baseline'?'baseline':policy==='mock'?'mock':policy==='replay'?'replay':live&&!fallback?'live':'unverified';
     $('#gd-clock').textContent = clock(s.time);
     $('#gd-gate').textContent = gateLabel(s.announced?s.newGate:s.oldGate);
     $('#gd-departure').textContent = `Departure ${clock(s.departureAt)}`;
@@ -179,6 +185,15 @@ export function mountGateDemoPanel({start, getController, focus, setRepresentati
     for (const p of ps) {
       const card=cards.get(p.id), passenger=(s.passengers??[]).find(v=>v.id===p.id)??{};
       card.querySelector('.gd-person-name').textContent = p.name ?? passenger.name ?? p.id;
+      const personal=entries.filter(e=>e.passengerId===p.id), accepted=personal.findLast(e=>e.type==='accepted'), proposed=personal.findLast(e=>e.type==='proposed')??accepted, validation=personal.findLast(e=>['accepted','rejected'].includes(e.type)), outcome=personal.findLast(e=>['completed','failed'].includes(e.type));
+      card.querySelector('.gd-controller').textContent=mode==='baseline'?'Baseline automatic policy':accepted?.source==='replay'?'Recorded Nosana replay · no new call':accepted?.source==='live'?'Nosana AI · '+(accepted.model??'model'):accepted?.source==='fallback'?('Fallback rules · '+(policy==='replay'?'replay mismatch':'live requested')):policy==='mock'?'Authored deterministic rules':'Nosana AI requested · pending';
+      card.querySelector('.gd-observed').textContent=clock(s.time)+' simulated';
+      card.querySelector('.gd-position').textContent=(passenger.position??[]).map(v=>Number(v).toFixed(1)).join(', ');
+      card.querySelector('.gd-proposed').textContent=proposed?words(proposed.action)+(proposed.seconds?' · '+proposed.seconds+'s':'')+' at '+clock(proposed.time):'Awaiting decision';
+      card.querySelector('.gd-validation').textContent=validation?words(validation.type)+' at '+clock(validation.time):'Pending';
+      card.querySelector('.gd-applied').textContent=outcome?outcome.detail+' ('+clock(outcome.time)+')':accepted?'Applied to engine · '+words(passenger.state):'No action applied';
+      card.querySelector('.gd-summary').textContent=accepted?.detail??'No declared summary yet';
+
       card.querySelector('.gd-person-state').textContent = passenger.state==='walking_to_gate'?'Walking to announced gate':passenger.state==='demo_waiting'?(passenger.lastAction==='read_board'?'Checking the flight board':'Waiting briefly'):passenger.state==='modeled_departed'?'Departed · simulated':finite(passenger.arrivedAt)?'At the new gate':'Waiting at the original gate';
       card.querySelector('.gd-person-result').textContent = finite(passenger.arrivedAt) ? `Reached new gate at ${clock(passenger.arrivedAt)}` : s.announced?'Responding to the shared announcement':'Waiting for the shared announcement';
       card.querySelector('.gd-known-gate').textContent = gateLabel(passenger.gateNodeId ?? p.knowledge?.gateNodeId ?? (s.announced?s.newGate:s.oldGate));
@@ -200,5 +215,5 @@ export function mountGateDemoPanel({start, getController, focus, setRepresentati
     renderComparison(s); syncDisabled();
   }
   const timer=setInterval(render,250); void checkEndpoint(); render();
-  return {render, getState:()=>({mode,policy,endpoint,retained:clone(retained)}), dispose(){disposed=true;clearInterval(timer);root.remove();}};
+  return {render, selectPassenger, getState:()=>({mode,policy,endpoint,selectedPassengerId,retained:clone(retained)}), dispose(){disposed=true;clearInterval(timer);root.remove();}};
 }

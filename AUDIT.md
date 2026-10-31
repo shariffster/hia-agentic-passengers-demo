@@ -1,29 +1,17 @@
 # Standalone export audit
 
-Audit time: 2026-10-31 09:14 UTC. This records verification of the standalone export.
+Updated31October2026 after live inference, sandbox replay, inspector, recording and optional scale-view verification.
 
-## Verification
+The export is an explicit allowlist. It contains the new schematic browser app, four retained controller/engine modules, a semantic-only display adapter, server proxy, tests, recorded synthetic runs, sanitized Daytona runner/evidence and a separate rule-controlled worker view. No original HIA asset tree, geometry, maps, airport data, photos, original screenshots, adoption pointers, runtime credentials or secret ledger are included. The screenshots underdocs show only new schematic pages.
 
-- **13/13 JavaScript controller tests passed** against the new three-node synthetic graph. Both arms keep the same profiles, speed, seed, schedule and information. Baseline gate arrivals are 113/113/113 seconds; the deterministic agent policy yields 113/116/128 seconds. Both achieve three synthetic departures at 241 seconds.
-- **23/23 Python proxy tests passed**, including protected configuration, missing configuration, request/response validation, hostile origin/host rejection, static path containment, sanitized errors, redirects and the 30-attempt request cap. Tests used only mocks and temporary loopback listeners. The initial sandbox blocked listener binding; an approved test rerun passed.
-- `node --check` passed for the new standalone renderer, panel, semantic display adapter and synthetic graph.
-- All four controller/engine files match the isolated candidate at export, including removal of personal narrative from a legacy notice and comment. `server.py` matches the finalized local proxy source. Exact hashes are in `EXPORT-MANIFEST.json`.
-- Every relative JavaScript import resolves within the export. The only non-relative test imports are Node built-ins. There are no npm dependencies or vendor files.
+Independent review found personal narrative in a legacy engine notice/comment after the initial repository publication. It was removed from the isolated candidate and public source, and the new repository's sole initial commit was replaced. Current source and branch history use the sanitized text. Generic synthetic-model limitations remain. The scale derivative also received the same privacy edit. The final Daytona receipt was generated after its vendor refresh and matches its included hashes.
 
-## Inclusion and privacy inspection
+Verification:16controller tests,32proxy tests,8Daytona lifecycle/replay tests and11scale tests pass. Rendered checks cover baseline/mock comparison, actual live decisions and movement, clickable inspectors, completed public live outcome, mobile width, scale play/pause/reset/baseline/selection throughDEMO-1500 and shared achieved times. The public live run contains4accepted Nosana decisions,0fallbacks, arrivals113/116/113s. Daytona reproduced those outcomes and confirmed deletion. The scale page reports1500rules/0LLM; it is counted groups on an invented corridor, not1500bodies or a fullHIA performance result.
 
-The export is an explicit allowlist, not a copy of the airport tree. No original asset, dataset, binary model, original image or screenshot, archive, release history, adoption pointer, configuration file, `.env` file or symlink is present.
+Earlier live attempts were not all successful:300-token outputs were truncated, and shorter request deadlines produced explicit fallback. These prompted bounded output/deadline changes and a model-specific advisory direct-answer request. The final included public recording succeeded; this is not a guarantee that every future call will.
 
-Independent review identified a legacy personal narrative in two source comments after initial publication; those comments were replaced with generic synthetic-model language in both the isolated candidate and public export. A bounded text scan found no personal absolute filesystem paths or provider-token-shaped strings. The only email-shaped match is an intentionally invalid `name:password@example.org` URL in a proxy rejection test. Other credentials in tests are declared fake fixtures. Environment/configuration field names are not credentials; no runtime environment or real configuration file was read for this audit.
+Static review found no provider-token-shaped secrets, personal absolute paths or private endpoints in included files. Fake test credentials and configuration field names are intentional. The source boundary is bounded, not a claim about excluded project files. No license grant or ownership determination is invented.
 
-The original airport waiting-seat, movement-layout and formation-envelope data are absent. The new `holding-layout.js` returns copies of semantic positions only. SVG visual lanes separate markers for inspection and add no simulation state, route distance, delay or clock.
+The shared private ledger was observed active on both authorized local preview servers, preserving the same attempt count and conservative reserve. The repository does not include its path configuration or contents. Tests verify missing/corrupt ledgers fail closed. Token estimates and reservation guards are not a settled bill.
 
-## Limits
-
-This audit does not claim ownership or licence clearance for every historical engine contribution. No new licence grant is attached. The retained engine's synthetic-model notices and source provenance remain visible.
-
-No real model provider was called during these tests. Mock/injected test replies do not prove production inference connectivity. The public UI must continue to distinguish configured, successful live, unavailable and fallback states.
-
-Rendered browser verification completed at 09:15 UTC: visible Run gate change, Run to outcome and Baseline controls produced baseline arrivals 113/113/113s and deterministic agent arrivals 113/116/128s at matched achieved time241s, with three synthetic departures in both arms. The new schematic screenshot in docs/demo-preview.png contains only this sanitized page. An initial favicon404 was fixed with an authored data-URI icon. The standalone page exposes `window.__PASSENGER_DEMO.getState()` for bounded observation. No external deployment or repository publication was performed by this export task.
-
-The manifest hashes all included files other than the manifest itself. Its content identity is SHA-256 of sorted `sha256`, two spaces, relative path and newline records. Recompute it after any change.
+EXPORT-MANIFEST.json hashes all public files except itself and git metadata. Recompute it after any change. The current four controller/engine files match the isolated candidate; the separately pinned Daytona/scale source revisions are identified in their manifests/notices.

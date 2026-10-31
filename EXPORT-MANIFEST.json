@@ -1,0 +1,166 @@
+{
+  "schema": "passenger-demo-public-export/1",
+  "preparedAt": "2026-10-31T09:26:06.521984+00:00",
+  "status": "PUBLIC_SANITIZED_SOURCE",
+  "contentIdentity": "99778abfb451673d48d154c907289238bfad40aa5c2aefb0144b11e51554e6cb",
+  "identityMethod": "sha256 of sorted sha256 two-spaces relative-path LF records; excludes this manifest",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 83,
+      "sha256": "6c3462dd0747e51f2792d584a6a0ca4fce616e8e19c0fc50461f9c0142ca4bc5"
+    },
+    {
+      "path": "AUDIT.md",
+      "bytes": 3806,
+      "sha256": "ce7ad1c3d3fb759b8e3edf586afe9e47c85d231c8a890b5135e6d8a97c4483ff"
+    },
+    {
+      "path": "NOTICE.md",
+      "bytes": 2599,
+      "sha256": "256f4348730a11a2c23b7e8c888c803f9dd04a98770dea8fdd4afeb9eb3d59bd"
+    },
+    {
+      "path": "PROVIDER-CONTRACT.md",
+      "bytes": 6482,
+      "sha256": "ab2d55cc435f95ba7c62a3307e4280850cc133a637668a71dbb83d4dd0d2219a"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4223,
+      "sha256": "8a4742d35ceb0edb919538388b6e6478df00fbdf4ac9c90a3565fac39c830b55"
+    },
+    {
+      "path": "docs/demo-preview.png",
+      "bytes": 449465,
+      "sha256": "03124df4a47da53a6fe71f4b11fb0d387302e15344f4d76d3ca52bb2480a17e5"
+    },
+    {
+      "path": "package.json",
+      "bytes": 284,
+      "sha256": "2c94cfe6d7a1396f54bb9f7df95c4f0ac11f61e2767978680a6d2f8369b15881"
+    },
+    {
+      "path": "server.py",
+      "bytes": 21123,
+      "sha256": "e276bf27c28c86a7ce91fe159145b4c025e871546c449f53124b997830262102"
+    },
+    {
+      "path": "tests/gate-agent.test.mjs",
+      "bytes": 15339,
+      "sha256": "98d742a12417172d071ff975e61343ccd4ebc1c285409c2a58331fdf95c2c660"
+    },
+    {
+      "path": "tests/test_server.py",
+      "bytes": 17644,
+      "sha256": "3346da32aed090559ddab96615a985f6b2f2cf768acec633a1f8236f14f10e69"
+    },
+    {
+      "path": "web/gate-agent-demo.js",
+      "bytes": 15734,
+      "sha256": "3d141e08505dc6ee8cf53d831079232b4d0766095ced3ecb8a281eb86a469810"
+    },
+    {
+      "path": "web/gate-demo-panel.css",
+      "bytes": 8670,
+      "sha256": "15a99cbbadf1fb52c6f8d5ba6d04b2c507f1578b91d13fadab63f8b261bbbd29"
+    },
+    {
+      "path": "web/gate-demo-panel.js",
+      "bytes": 18820,
+      "sha256": "71c8ab6feb94e4d9a939d7ebf78f93ea740dd767a6da168024f5fa0c607cb07b"
+    },
+    {
+      "path": "web/holding-layout.js",
+      "bytes": 733,
+      "sha256": "9f37f1322d17bb603ec738f035abe1bc40e58bf58ff2a40fd7a506089c2370fa"
+    },
+    {
+      "path": "web/index.html",
+      "bytes": 4490,
+      "sha256": "085809ad884128f008e5086688011ad50d915516171ccc8d5c03823d7cb67419"
+    },
+    {
+      "path": "web/recovery-simulation.js",
+      "bytes": 78735,
+      "sha256": "82d9362e7e789176da33bf60395c49a8ad74a67cc89f8ad2ff5a2720556b2531"
+    },
+    {
+      "path": "web/recovery-world.js",
+      "bytes": 69852,
+      "sha256": "206d0b233c45385b3eac9839363f9b258e0658aa19210d6b5b920458688cefee"
+    },
+    {
+      "path": "web/simulation.js",
+      "bytes": 36883,
+      "sha256": "83b8624799b21a4c265056b1516f5d25aa421cc4afd7c6af821cbb472263be1a"
+    },
+    {
+      "path": "web/standalone.css",
+      "bytes": 5172,
+      "sha256": "a15766340405d441732ca3ecfd4cad3ea39ee7beb4a460731d7e828f3cc900cd"
+    },
+    {
+      "path": "web/standalone.js",
+      "bytes": 5392,
+      "sha256": "ddc3d55d1e805fa3e4b56f1b670685b2ce5ec1b456d57c7f7ecc35b3bafc1475"
+    },
+    {
+      "path": "web/synthetic-graph.js",
+      "bytes": 594,
+      "sha256": "a1ff74c5dfe535be85ee995ad336ea560fc894488a3228da039594d2e35ee21d"
+    }
+  ],
+  "totalBytesExcludingManifest": 766123,
+  "exactSourceCopies": [
+    {
+      "path": "web/gate-agent-demo.js",
+      "sha256": "3d141e08505dc6ee8cf53d831079232b4d0766095ced3ecb8a281eb86a469810",
+      "matchesIsolatedSource": false
+    },
+    {
+      "path": "web/recovery-world.js",
+      "sha256": "206d0b233c45385b3eac9839363f9b258e0658aa19210d6b5b920458688cefee",
+      "matchesIsolatedSource": true
+    },
+    {
+      "path": "web/recovery-simulation.js",
+      "sha256": "82d9362e7e789176da33bf60395c49a8ad74a67cc89f8ad2ff5a2720556b2531",
+      "matchesIsolatedSource": true
+    },
+    {
+      "path": "web/simulation.js",
+      "sha256": "83b8624799b21a4c265056b1516f5d25aa421cc4afd7c6af821cbb472263be1a",
+      "matchesIsolatedSource": true
+    }
+  ],
+  "sourceAdapterReplacement": "web/holding-layout.js is newly authored semantic-only display adapter",
+  "graph": "web/synthetic-graph.js; new invented120m corridor",
+  "tests": {
+    "nodePassed": 13,
+    "nodeFailed": 0,
+    "pythonPassed": 23,
+    "pythonFailed": 0,
+    "externalProviderCalls": 0
+  },
+  "renderedBrowserReview": {
+    "status": "verified_local",
+    "at": "2026-10-31T09:16:49.730239+00:00",
+    "sameAchievedTime": 241,
+    "agentArrivals": [
+      113,
+      116,
+      128
+    ],
+    "baselineArrivals": [
+      113,
+      113,
+      113
+    ],
+    "syntheticDeparturesPerArm": 3
+  },
+  "publicationPerformedByExportTask": false,
+  "privacyEdits": [
+    "Removed personal narrative from a legacy engine notice and comment; synthetic behavior disclaimer retained."
+  ]
+}

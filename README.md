@@ -1,4 +1,6 @@
-# Three passengers, one gate change
+# Hamad International Airport Simulator (HIA Sim)
+
+An independent experimental airport simulator; not an official Hamad International Airport product.
 
 ## What this repository reproduces
 
@@ -6,7 +8,7 @@ This public repository runs a self-contained **2D Passenger Lab** using the boun
 
 ## Full 3D demonstration
 
-The same experiment is also integrated into our separate local **HIA 3D environment** for live demonstration. The non-public airport scene and assets are intentionally excluded from this sanitized export; they are not required to run the public demo. This repository does not build the full 3D airport. The optional1,500-case view displays counted groups of rule-controlled cases, not1,500individual3D orLLMagents.
+The same experiment is also integrated into our separate local **HIA Sim 3D environment** for live demonstration. The non-public airport scene and assets are intentionally excluded from this sanitized export; they are not required to run the public demo. This repository does not build the full 3D airport. The optional1,500-case view displays counted groups of rule-controlled cases, not1,500individual3D orLLMagents.
 
 ## Judge quickstart — no keys or paid services
 
@@ -28,7 +30,7 @@ For the minimal Python-only launch, skip npm entirely and run `python3 -B server
 
 An inspectable passenger decision experiment: three authored profiles hear the same announcement, choose a bounded action, and receive an engine outcome. Compare the existing automatic baseline with an authored deterministic policy, fresh Nosana inference, or a clearly labeled recording replay.
 
-This public reproduction uses an invented **120 m corridor**. The separate local HIA 3D demo uses furnished A3 scenery; its airport assets, historical datasets and staging geometry are excluded. These are software experiments, not calibrated passenger behavior.
+This public reproduction uses an invented **120 m corridor**. The separate local HIA Sim 3D demo uses furnished A3 scenery; its airport assets, historical datasets and staging geometry are excluded. These are software experiments, not calibrated passenger behavior.
 
 ![Completed live Nosana run on the synthetic corridor](docs/live-run.png)
 

@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Three passengers, one gate change</title>
+<title>Hamad International Airport Simulator (HIA Sim) · Public 2D demo</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23244d3b'/%3E%3Cpath d='M13 35L34 14M16 14h18v18' fill='none' stroke='%23f2f6d9' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <meta name="description" content="A bounded passenger decision experiment on a synthetic corridor. Compare automatic routing with validated agent actions.">
 <link rel="stylesheet" href="./standalone.css">
 </head>
 <body>
 <main id="experience">
-  <header class="page-head"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">↗</span><span>PASSENGER LAB<small>Three passengers · one gate change</small></span></a><span class="local-badge">Schematic demo</span></header>
+  <header class="page-head"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">↗</span><span>AIRPORT SIM<small>Public 2D Passenger Lab</small></span></a><span class="local-badge">Schematic demo</span></header>
   <section class="stage" aria-label="Synthetic corridor">
-    <div class="stage-heading"><p class="kicker">THE DECISION IS THE EXPERIMENT</p><h1>Same announcement.<br>Different choices.</h1><p>Three passengers share a 120 m corridor. A bounded controller chooses an action; the simulation executes it.</p></div>
+    <div class="stage-heading"><p class="kicker">Hamad International Airport Simulator (HIA Sim)</p><h1>Same announcement.<br>Different choices.</h1><p>Three passengers share a 120 m corridor. A bounded controller chooses an action; the simulation executes it.</p></div>
     <div class="scene-frame">
       <div class="scene-header"><span id="scene-mode">Agent · deterministic demo policy</span><span id="scene-time">T+0:01</span></div>
       <svg id="corridor" viewBox="0 0 820 360" role="img" aria-labelledby="corridor-title corridor-desc">
@@ -33,7 +33,7 @@
       <div class="playback"><button id="play-pause" type="button">Play</button><label>Speed <select id="play-speed"><option value="1">1×</option><option value="4" selected>4×</option><option value="15">15×</option></select></label><button id="finish-run" type="button">Run to outcome</button><span id="outcome-count">0 / 3 at new gate</span></div>
     </div>
     <div class="scene-notes"><div><span>01</span><strong>Observe</strong><p>Published information only.</p></div><div><span>02</span><strong>Choose &amp; validate</strong><p>Move, read the board or wait.</p></div><div><span>03</span><strong>Execute &amp; learn</strong><p>Engine movement and explicit outcomes.</p></div></div>
-    <p class="boundary-note">This public version uses an invented corridor. The separate HIA 3D scene and its assets remain local. Profiles are illustrative, not predictions of real people.</p>
+    <p class="boundary-note">This public version uses an invented corridor. The separate HIA Sim 3D scene and its assets remain local. This is an independent experiment, not an official airport product. Profiles are illustrative, not predictions of real people.</p>
   </section>
 </main>
 <script type="module" src="./standalone.js"></script>

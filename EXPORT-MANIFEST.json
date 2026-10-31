@@ -1,8 +1,8 @@
 {
   "schema": "passenger-demo-public-export/1",
-  "preparedAt": "2026-10-31T10:02:01.363159+00:00",
+  "preparedAt": "2026-10-31T10:03:58.296590+00:00",
   "status": "PUBLIC_SANITIZED_FINAL_CANDIDATE",
-  "contentIdentity": "47ce4c711137154537bb5d34f31fd6cc25b4b505e3517156858257322242373d",
+  "contentIdentity": "c1c3dc3c2aef4e10a22f1d27406022b40d8532f7a1eafd824c3e56b73c5d1eec",
   "identityMethod": "sha256 of sorted sha256 two-spaces relative-path LF records; excludes this manifest andgitmetadata",
   "files": [
     {
@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7583,
-      "sha256": "a95f3522807427762bff4766cea0f5bc48cea79a487189afd0b3e2729e0470a8"
+      "bytes": 7706,
+      "sha256": "ddeab8e0aeb51613d4d9336687afb7f918dbdad5602e9449fb803dc2756b10d9"
     },
     {
       "path": "REPLAY-CONTRACT.md",
@@ -252,8 +252,8 @@
     },
     {
       "path": "web/index.html",
-      "bytes": 4490,
-      "sha256": "085809ad884128f008e5086688011ad50d915516171ccc8d5c03823d7cb67419"
+      "bytes": 4597,
+      "sha256": "ca8c74d2063e6e642654823c3dd76f54ba71743274c4a4feb433f597b7650086"
     },
     {
       "path": "web/recordings/nosana-live-run.json",
@@ -391,7 +391,7 @@
       "sha256": "a1ff74c5dfe535be85ee995ad336ea560fc894488a3228da039594d2e35ee21d"
     }
   ],
-  "totalBytesExcludingManifest": 2037118,
+  "totalBytesExcludingManifest": 2037348,
   "exactSourceCopies": [
     {
       "path": "web/gate-agent-demo.js",

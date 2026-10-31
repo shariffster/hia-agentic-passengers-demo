@@ -1,10 +1,16 @@
 {
-  "name":"passenger-gate-decision-demo",
-  "private":true,
-  "type":"module",
-  "scripts":{
-    "start":"python3 -B server.py --port 58741",
-    "test":"node --test tests/gate-agent.test.mjs",
-    "test:proxy":"python3 -B -m unittest discover -s tests -p 'test_server.py' -v"
+  "name": "passenger-gate-decision-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "python3 -B server.py --port 58741",
+    "test": "node --test tests/gate-agent.test.mjs",
+    "test:proxy": "python3 -B -m unittest discover -s tests -p 'test_server.py' -v",
+    "build": "node scripts/check-public-build.mjs",
+    "test:scale": "node --test web/scale-lab/tests/*.mjs",
+    "test:daytona": "node --test daytona/tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

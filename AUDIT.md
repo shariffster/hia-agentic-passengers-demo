@@ -15,3 +15,5 @@ Static review found no provider-token-shaped secrets, personal absolute paths or
 The shared private ledger was observed active on both authorized local preview servers, preserving the same attempt count and conservative reserve. The repository does not include its path configuration or contents. Tests verify missing/corrupt ledgers fail closed. Token estimates and reservation guards are not a settled bill.
 
 EXPORT-MANIFEST.json hashes all public files except itself and git metadata. Recompute it after any change. The current four controller/engine files match the isolated candidate; the separately pinned Daytona/scale source revisions are identified in their manifests/notices.
+
+Judge reproducibility update: package scripts provide npmstart, npmbuild (offline manifest/import/syntax validation) and tests. Root npm installation has no dependencies and works with --offline. The README prominently distinguishes this complete public2D reproduction from the separate local3D demonstration. No private scene files or credentials are needed. Clean-checkout verification is recorded separately by the integration owner.

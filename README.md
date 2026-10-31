@@ -1,5 +1,31 @@
 # Three passengers, one gate change
 
+## What this repository reproduces
+
+This public repository runs a self-contained **2D Passenger Lab** using the bounded passenger decision and execution logic. Recorded and deterministic modes run without credentials. Fresh live Nosana inference requires separately configured credentials.
+
+## Full 3D demonstration
+
+The same experiment is also integrated into our separate local **HIA 3D environment** for live demonstration. The non-public airport scene and assets are intentionally excluded from this sanitized export; they are not required to run the public demo. This repository does not build the full 3D airport. The optional1,500-case view displays counted groups of rule-controlled cases, not1,500individual3D orLLMagents.
+
+## Judge quickstart — no keys or paid services
+
+Requirements: Python3.10+, Node22+ and a modern browser. The app is plain browser modules; build verifies the complete public package without downloading dependencies or compiling assets.
+
+```sh
+git clone https://github.com/shariffster/hia-agentic-passengers-demo.git
+cd hia-agentic-passengers-demo
+npm install --ignore-scripts --offline
+npm run build
+npm test
+npm start
+```
+
+Open **http://127.0.0.1:58741/**. Choose **Recorded Nosana replay** or **Deterministic demo policy**, then **To departure**. Both work with no account, environment file or model key. The evidence and optional scale pages are linked in the panel footer. Fresh Nosana inference and creating a new Daytona sandbox are optional and require your own authorized credentials.
+
+For the minimal Python-only launch, skip npm entirely and run `python3 -B server.py --port 58741`. Use `--port 58746` if the default port is occupied. This is the complete public schematic reproduction; private HIA files are not required.
+
+
 An inspectable passenger decision experiment: three authored profiles hear the same announcement, choose a bounded action, and receive an engine outcome. Compare the existing automatic baseline with an authored deterministic policy, fresh Nosana inference, or a clearly labeled recording replay.
 
 This public reproduction uses an invented **120 m corridor**. The separate local HIA 3D demo uses furnished A3 scenery; its airport assets, historical datasets and staging geometry are excluded. These are software experiments, not calibrated passenger behavior.

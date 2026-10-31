@@ -1,8 +1,8 @@
 {
   "schema": "passenger-demo-public-export/1",
-  "preparedAt": "2026-10-31T09:56:48.764257+00:00",
+  "preparedAt": "2026-10-31T10:02:01.363159+00:00",
   "status": "PUBLIC_SANITIZED_FINAL_CANDIDATE",
-  "contentIdentity": "30c78144f6389abae3134a92436a79954536270c5fe57af15e6acedc5f0e5594",
+  "contentIdentity": "47ce4c711137154537bb5d34f31fd6cc25b4b505e3517156858257322242373d",
   "identityMethod": "sha256 of sorted sha256 two-spaces relative-path LF records; excludes this manifest andgitmetadata",
   "files": [
     {
@@ -12,8 +12,8 @@
     },
     {
       "path": "AUDIT.md",
-      "bytes": 3020,
-      "sha256": "4726bb970cf1b9bc82105e0285ce4a01b33af09d91eee555fc71ef32a2fcef0a"
+      "bytes": 3458,
+      "sha256": "9a3d2553c0654bd5af8297f96c06a6f82f0dc4dcbacaa8cbff2a62e9bf97f807"
     },
     {
       "path": "INSPECTOR-CONTRACT.md",
@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5813,
-      "sha256": "c4712ad5606e559c386a5d856666087cf634c8ab6e8c48c321df83ee6d4d5ffa"
+      "bytes": 7583,
+      "sha256": "a95f3522807427762bff4766cea0f5bc48cea79a487189afd0b3e2729e0470a8"
     },
     {
       "path": "REPLAY-CONTRACT.md",
@@ -181,9 +181,19 @@
       "sha256": "201ae2447802f0181fe6033cbd8b692a3e1b61142c56664ae574ed065fe2e1da"
     },
     {
+      "path": "package-lock.json",
+      "bytes": 222,
+      "sha256": "20eebbb228d542917abef728e01754d035a114121815af2d282c71024b1e0200"
+    },
+    {
       "path": "package.json",
-      "bytes": 284,
-      "sha256": "2c94cfe6d7a1396f54bb9f7df95c4f0ac11f61e2767978680a6d2f8369b15881"
+      "bytes": 501,
+      "sha256": "41e79fb32756903423d2bbfee4b7cdf7a59addcd89dfbb8d0ad8235a396facfc"
+    },
+    {
+      "path": "scripts/check-public-build.mjs",
+      "bytes": 1717,
+      "sha256": "6bfbc6a3d7fad738f4b75a21b4d401057f2bdd2f7a2aca3ff8fa901c204f4cc6"
     },
     {
       "path": "server.py",
@@ -381,7 +391,7 @@
       "sha256": "a1ff74c5dfe535be85ee995ad336ea560fc894488a3228da039594d2e35ee21d"
     }
   ],
-  "totalBytesExcludingManifest": 2032754,
+  "totalBytesExcludingManifest": 2037118,
   "exactSourceCopies": [
     {
       "path": "web/gate-agent-demo.js",
